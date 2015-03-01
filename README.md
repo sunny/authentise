@@ -24,4 +24,7 @@ Authentize::API.upload_file(file: File.open("example.stl"),
                             cents: 2_00,
                             currency: "EUR")
 # => "https://widget.sendshapes.com/?token=33b41d6e80d4918cfff768185d1d31a6"
+
+Authentize::API.get_status(token: "33b41d6e80d4918cfff768185d1d31a6")
+# => { printing_job_status: "warming_up", printing_percentage: 0, minutes_left: 21, message: "" }
 ```
