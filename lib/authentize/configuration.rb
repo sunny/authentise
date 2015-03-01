@@ -4,7 +4,7 @@ module Authentize
   end
 
   class << self
-    attr_writer :configuration
+    attr_accessor :configuration
   end
 
   def self.configure
