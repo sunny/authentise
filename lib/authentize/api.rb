@@ -60,6 +60,8 @@ module Authentize
       }
     end
 
+    private_class_method
+
     def parse(response)
       json = JSON.parse(response)
       if json["status"]["code"] != "ok"
