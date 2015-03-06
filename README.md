@@ -28,3 +28,12 @@ Authentize::API.upload_file(file: File.new("example.stl", "rb"),
 Authentize::API.get_status(token: "33b41d6e80d4918cfff768185d1d31a6")
 # => { printing_job_status: "warming_up", printing_percentage: 0, minutes_left: 21, message: "" }
 ```
+
+Development
+-----------
+
+To launch specs, please install:
+
+```sh
+$ gem install webmock
+```
