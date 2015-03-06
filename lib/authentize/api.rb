@@ -13,20 +13,24 @@ module Authentize
     module_function
 
     def create_token
-      response = RestClient.get(CREATE_TOKEN_URL,
-                                api_key: Authentize.configuration.secret_partner_key)
+      params = {
+        api_key: Authentize.configuration.secret_partner_key
+      }
+      response = RestClient.get(CREATE_TOKEN_URL, params: params)
       data = parse(response)
       data["token"]
     end
 
     def upload_file(file: nil, token: nil, email: nil, cents: nil, currency: "USD")
-      response = RestClient.post(UPLOAD_FILE_URL,
-                                 api_key: Authentize.configuration.secret_partner_key,
-                                 token: token,
-                                 receiver_email: email,
-                                 print_value: cents,
-                                 print_value_currency: currency,
-                                 stl_file: file)
+      params = {
+        api_key: Authentize.configuration.secret_partner_key,
+        token: token,
+        receiver_email: email,
+        print_value: cents,
+        print_value_currency: currency,
+        stl_file: file
+      }
+      response = RestClient.post(UPLOAD_FILE_URL, params, accept: :json)
       data = parse(response)
       data["ssl_token_link"]
     end
@@ -42,9 +46,11 @@ module Authentize
     # - `confirmed_success`
     # - `confirmed_failure`
     def get_status(token: nil)
-      response = RestClient.get(STATUS_URL,
-                                api_key: Authentize.configuration.secret_partner_key,
-                                token: token)
+      params = {
+        api_key: Authentize.configuration.secret_partner_key,
+        token: token
+      }
+      response = RestClient.get(STATUS_URL, params: params)
       data = parse(response)
       {
         printing_job_status: data["printing_job_status"].downcase,

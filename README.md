@@ -18,7 +18,7 @@ end
 Authentize::API.create_token
 # => "33b41d6e80d4918cfff768185d1d31a6"
 
-Authentize::API.upload_file(file: File.open("example.stl"),
+Authentize::API.upload_file(file: File.new("example.stl", "rb"),
                             token: "33b41d6e80d4918cfff768185d1d31a6",
                             email: "example@example.com",
                             cents: 2_00,
