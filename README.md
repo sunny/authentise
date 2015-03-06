@@ -13,6 +13,7 @@ require "authentise"
 
 Authentise.configure do |c|
   c.secret_partner_key = "ZSBzaG9y-dCB2ZWhl-bWVuY2Ug-b2YgYW55-IGNhcm5h-bCB=="
+  c.use_ssl = false
 end
 
 upload = Authentise::Upload.new(

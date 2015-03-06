@@ -6,22 +6,24 @@ module Authentise
   module API
     class Error < RuntimeError; end
 
-    CREATE_TOKEN_URL = "https://widget.sendshapes.com:3443/api3/api_create_partner_token"
-    UPLOAD_FILE_URL = "https://widget.sendshapes.com:3443/api3/api_upload_partner_stl"
-    STATUS_URL = "https://widget.sendshapes.com:3443/api3/api_get_partner_print_status"
+    CREATE_TOKEN_PATH = "api3/api_create_partner_token"
+    UPLOAD_FILE_PATH = "api3/api_upload_partner_stl"
+    STATUS_PATH = "api3/api_get_partner_print_status"
 
     module_function
 
     def create_token
+      url = "#{host}/#{CREATE_TOKEN_PATH}"
       params = {
         api_key: Authentise.configuration.secret_partner_key
       }
-      response = RestClient.get(CREATE_TOKEN_URL, params: params)
+      response = RestClient.get(url, params: params)
       data = parse(response)
       data["token"]
     end
 
     def upload_file(file: nil, token: nil, email: nil, cents: nil, currency: "USD")
+      url = "#{host}/#{UPLOAD_FILE_PATH}"
       params = {
         api_key: Authentise.configuration.secret_partner_key,
         token: token,
@@ -30,7 +32,7 @@ module Authentise
         print_value_currency: currency,
         stl_file: file
       }
-      response = RestClient.post(UPLOAD_FILE_URL, params, accept: :json)
+      response = RestClient.post(url, params, accept: :json)
       data = parse(response)
       data["ssl_token_link"]
     end
@@ -46,11 +48,12 @@ module Authentise
     # - `confirmed_success`
     # - `confirmed_failure`
     def get_status(token: nil)
+      url = "#{host}/#{STATUS_PATH}"
       params = {
         api_key: Authentise.configuration.secret_partner_key,
         token: token
       }
-      response = RestClient.get(STATUS_URL, params: params)
+      response = RestClient.get(url, params: params)
       data = parse(response)
       {
         printing_job_status: data["printing_job_status"].downcase,
@@ -70,6 +73,14 @@ module Authentise
         json["data"]
       else
         fail Error, "JSON with no data: #{response}"
+      end
+    end
+
+    def host
+      if Authentise.configuration.use_ssl
+        "https://widget.sendshapes.com:3443"
+      else
+        "http://widget.sendshapes.com:3443"
       end
     end
   end
