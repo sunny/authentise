@@ -3,7 +3,7 @@ Ruby gem to access Authentise API v3
 
 See http://docs.dev-auth.com/
 
-Ye be warned: this has not been tested whatsoever.
+Ye be warned: this has not been tested in production.
 
 Example usage
 -------------
@@ -15,19 +15,28 @@ Authentise.configure do |c|
   c.secret_partner_key = "ZSBzaG9y-dCB2ZWhl-bWVuY2Ug-b2YgYW55-IGNhcm5h-bCB=="
 end
 
-Authentise::API.create_token
+upload = Authentise::Upload.new(
+  stl_file: File.new("example.stl", "rb"),
+  email: "example@example.com",
+  cents: 2_00,
+  currency: "EUR"
+)
+
+upload.token
 # => "33b41d6e80d4918cfff768185d1d31a6"
 
-Authentise::API.upload_file(file: File.new("example.stl", "rb"),
-                            token: "33b41d6e80d4918cfff768185d1d31a6",
-                            email: "example@example.com",
-                            cents: 2_00,
-                            currency: "EUR")
+upload.link_url
 # => "https://widget.sendshapes.com/?token=33b41d6e80d4918cfff768185d1d31a6"
 
-Authentise::API.get_status(token: "33b41d6e80d4918cfff768185d1d31a6")
-# => { printing_job_status: "warming_up", printing_percentage: 0, minutes_left: 21, message: "" }
+upload.status
+# => {
+#  printing_job_status: "warming_up",
+#  printing_percentage: 0,
+#  minutes_left: 21,
+#  message: ""
+# }
 ```
+
 
 Development
 -----------
