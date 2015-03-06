@@ -1,1 +1,5 @@
 pkg/
+
+# For testing purposes:
+credentials.rb
+example.stl
