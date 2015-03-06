@@ -64,10 +64,13 @@ module Authentize
 
     def parse(response)
       json = JSON.parse(response)
-      if json["status"]["code"] != "ok"
-        fail Error.new(json["status"]["extended_description"])
+      if json["status"] and json["status"]["code"] != "ok"
+        fail Error, json["status"]["extended_description"]
+      elsif json["data"]
+        json["data"]
+      else
+        fail Error, "JSON with no data: #{response}"
       end
-      json["data"]
     end
   end
 end

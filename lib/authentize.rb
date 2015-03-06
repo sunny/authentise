@@ -1,1 +1,1 @@
-require "authentize/api"
+require "authentize/upload"
