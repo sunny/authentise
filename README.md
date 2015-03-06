@@ -52,3 +52,10 @@ To launch specs:
 ```sh
 $ rake
 ```
+
+
+License
+-------
+
+Created by Sunny Ripert for [Cults.](https://cults3d.com),
+licensed under the MIT License.
