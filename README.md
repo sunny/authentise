@@ -35,5 +35,11 @@ Development
 To launch specs, please install:
 
 ```sh
-$ gem install webmock
+$ gem install webmock rake
+```
+
+Then:
+
+```sh
+$ rake
 ```
