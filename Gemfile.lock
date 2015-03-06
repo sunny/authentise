@@ -1,0 +1,30 @@
+PATH
+  remote: .
+  specs:
+    authentize (0.0.1)
+      rest-client
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.3.7)
+    crack (0.4.2)
+      safe_yaml (~> 1.0.0)
+    mime-types (2.4.3)
+    netrc (0.7.7)
+    rake (10.4.2)
+    rest-client (1.7.2)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
+    safe_yaml (1.0.4)
+    webmock (1.20.4)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  authentize!
+  rake
+  webmock

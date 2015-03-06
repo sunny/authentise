@@ -32,13 +32,13 @@ Authentize::API.get_status(token: "33b41d6e80d4918cfff768185d1d31a6")
 Development
 -----------
 
-To launch specs, please install:
+For local development, please install the `bundler` gem then:
 
 ```sh
-$ gem install webmock rake
+$ bundle
 ```
 
-Then:
+To launch specs:
 
 ```sh
 $ rake
