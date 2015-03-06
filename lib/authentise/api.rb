@@ -80,7 +80,7 @@ module Authentise
       if Authentise.configuration.use_ssl
         "https://widget.sendshapes.com:3443"
       else
-        "http://widget.sendshapes.com:3443"
+        "http://widget.sendshapes.com:3000"
       end
     end
   end
