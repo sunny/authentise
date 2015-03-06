@@ -1,12 +1,12 @@
 require "spec_helper"
 
-describe Authentize::API do
+describe Authentise::API do
   describe ".create_token" do
     it "returns a token from the API" do
       stub_request(:get, "https://widget.sendshapes.com:3443/api3/api_create_partner_token?api_key=test").
         to_return(status: 200, body: '{"data":{"token":"meh"}}')
 
-      Authentize::API.create_token.must_equal "meh"
+      Authentise::API.create_token.must_equal "meh"
     end
   end
 
@@ -29,7 +29,7 @@ describe Authentize::API do
         with(body: request_body, headers: request_headers).
         to_return(status: 200, body: '{"data":{"ssl_token_link":"http://bah"}}')
 
-      returned = Authentize::API.upload_file(file: nil,
+      returned = Authentise::API.upload_file(file: nil,
                                              token: "meh",
                                              email: "example@example.com",
                                              cents: 100,
@@ -59,7 +59,7 @@ describe Authentize::API do
       stub_request(:get, api_url).
         to_return(status: 200, body: body.to_json)
 
-      returned = Authentize::API.get_status(token: "meh")
+      returned = Authentise::API.get_status(token: "meh")
       returned.must_equal(
         printing_job_status: "warming_up",
         printing_percentage: 20,

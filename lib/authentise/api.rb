@@ -1,8 +1,8 @@
 require "json"
 require "rest-client"
-require "authentize/configuration"
+require "authentise/configuration"
 
-module Authentize
+module Authentise
   module API
     class Error < RuntimeError; end
 
@@ -14,7 +14,7 @@ module Authentize
 
     def create_token
       params = {
-        api_key: Authentize.configuration.secret_partner_key
+        api_key: Authentise.configuration.secret_partner_key
       }
       response = RestClient.get(CREATE_TOKEN_URL, params: params)
       data = parse(response)
@@ -23,7 +23,7 @@ module Authentize
 
     def upload_file(file: nil, token: nil, email: nil, cents: nil, currency: "USD")
       params = {
-        api_key: Authentize.configuration.secret_partner_key,
+        api_key: Authentise.configuration.secret_partner_key,
         token: token,
         receiver_email: email,
         print_value: cents,
@@ -47,7 +47,7 @@ module Authentize
     # - `confirmed_failure`
     def get_status(token: nil)
       params = {
-        api_key: Authentize.configuration.secret_partner_key,
+        api_key: Authentise.configuration.secret_partner_key,
         token: token
       }
       response = RestClient.get(STATUS_URL, params: params)

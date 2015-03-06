@@ -1,8 +1,8 @@
 require "minitest/autorun"
 require "webmock/minitest"
 
-require "authentize"
+require "authentise"
 
-Authentize.configure do |c|
+Authentise.configure do |c|
   c.secret_partner_key = "test"
 end

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    authentize (0.0.1)
+    authentise (0.0.1)
       rest-client
 
 GEM
@@ -25,6 +25,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  authentize!
+  authentise!
   rake
   webmock

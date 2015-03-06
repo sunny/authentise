@@ -1,6 +1,6 @@
-require "authentize/api"
+require "authentise/api"
 
-module Authentize
+module Authentise
   class Upload
     attr_reader :stl_file, :email, :cents, :currency
 

@@ -1,4 +1,4 @@
-module Authentize
+module Authentise
   class Configuration
     attr_accessor :secret_partner_key
   end

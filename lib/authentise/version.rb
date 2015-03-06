@@ -1,3 +1,3 @@
-module Authentize
+module Authentise
   VERSION = "0.0.1"
 end
