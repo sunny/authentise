@@ -18,8 +18,8 @@ describe Authentise::Upload do
   describe '#link_url' do
     it "returns a token from the API" do
       upload.stub :token, "meh" do
-        Authentise::API.stub :upload_file, "http://bah" do
-          upload.link_url.must_equal "http://bah"
+        Authentise::API.stub :upload_file, "https://bah" do
+          upload.link_url.must_equal "https://bah"
         end
       end
     end
