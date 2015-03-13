@@ -57,7 +57,7 @@ module Authentise
       response = RestClient.get(url, params: params)
       data = parse(response)
       {
-        printing_job_status: data["printing_job_status"].downcase,
+        printing_job_status_name: data["printing_job_status_name"].downcase,
         printing_percentage: data["printing_percentage"],
         minutes_left: data["minutes_left"],
         message: data["message"]

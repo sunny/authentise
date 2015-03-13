@@ -31,7 +31,7 @@ upload.link_url
 
 upload.status
 # => {
-#  printing_job_status: "warming_up",
+#  printing_job_status_name: "warming_up",
 #  printing_percentage: 0,
 #  minutes_left: 21,
 #  message: ""

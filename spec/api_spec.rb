@@ -25,10 +25,11 @@ describe Authentise::API do
                           "Content-Type" => "application/x-www-form-urlencoded",
                           "User-Agent" => "Ruby"}
 
+      response_body = '{"data":{"ssl_token_link":"https://bah"}}'
+
       stub_request(:post, api_url)
         .with(body: request_body, headers: request_headers)
-        .to_return(status: 200,
-                   body: '{"data":{"ssl_token_link":"https://bah"}}')
+        .to_return(status: 200, body: response_body)
 
       returned = Authentise::API.upload_file(file: nil,
                                              token: "meh",
@@ -63,24 +64,25 @@ describe Authentise::API do
                        "receiver_email" => "example@example.com",
                        "stl_file" => "",
                        "token"=>"meh"}
-      body = {
+      response_body = {
+        status: { code: "ok" },
         data: {
-          printing_job_status: "WARMING_UP",
+          printing_job_status_name: "WARMING_UP",
           printing_percentage: 20,
-          minutes_left: 5,
-          message: "",
+          minutes_left: nil,
+          message: nil,
         }
       }
 
       stub_request(:get, api_url)
-        .to_return(status: 200, body: body.to_json)
+        .to_return(status: 200, body: response_body.to_json)
 
       returned = Authentise::API.get_status(token: "meh")
       returned.must_equal(
-        printing_job_status: "warming_up",
+        printing_job_status_name: "warming_up",
         printing_percentage: 20,
-        minutes_left: 5,
-        message: ""
+        minutes_left: nil,
+        message: nil
       )
     end
   end
