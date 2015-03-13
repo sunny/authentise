@@ -4,11 +4,16 @@ module Authentise
   class Upload
     attr_reader :stl_file, :email, :cents, :currency
 
-    def initialize(stl_file: nil, email: nil, cents: nil, currency: nil)
+    def initialize(stl_file: nil,
+                   email: nil,
+                   cents: nil,
+                   currency: nil,
+                   token: nil)
       @stl_file = stl_file
       @email = email
       @cents = cents
       @currency = currency
+      @token = token
     end
 
     def token
