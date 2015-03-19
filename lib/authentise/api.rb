@@ -35,7 +35,11 @@ module Authentise
       response = RestClient.post(url, params, accept: :json)
       data = parse(response)
 
-      iframe_link(data["ssl_token_link"])
+      if Authentise.configuration.use_ssl
+        data["ssl_token_link"]
+      else
+        data["token_link"]
+      end
     end
 
     # Returns a status hash for the given token if the print has started.
@@ -84,14 +88,5 @@ module Authentise
         "http://widget.sendshapes.com:3000"
       end
     end
-
-    def iframe_link(url)
-      if Authentise.configuration.use_ssl
-        url
-      else
-        url.sub(/^https:/, 'http:')
-      end
-    end
-
   end
 end

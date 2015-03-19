@@ -39,10 +39,10 @@ describe Authentise::API do
       returned.must_equal "https://bah"
     end
 
-    it "transforms the url if not using ssl" do
+    it "uses the non-ssl link if use_ssl is false" do
       api_url = "http://widget.sendshapes.com:3000/api3/api_upload_partner_stl"
       stub_request(:post, api_url)
-        .to_return(body: '{"data":{"ssl_token_link":"https://bah"}}')
+        .to_return(body: '{"data":{"token_link":"http://bah"}}')
 
       Authentise.configuration.stub :use_ssl, false do
         returned = Authentise::API.upload_file(file: nil,
