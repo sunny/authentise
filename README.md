@@ -3,14 +3,10 @@ Ruby gem to access Authentise API v3
 
 See http://docs.dev-auth.com/
 
-Ye be warned: this has not been tested in production.
-
 Example usage
 -------------
 
 ```rb
-require "authentise"
-
 Authentise.configure do |c|
   c.secret_partner_key = "ZSBzaG9y-dCB2ZWhl-bWVuY2Ug-b2YgYW55-IGNhcm5h-bCB=="
   c.use_ssl = false
@@ -36,6 +32,15 @@ upload.status
 #  minutes_left: 21,
 #  message: ""
 # }
+```
+
+Install
+-------
+
+Add the following line to your Gemfile:
+
+```rb
+gem "authentise"
 ```
 
 
