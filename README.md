@@ -1,7 +1,7 @@
 Ruby gem to access Authentise API v3
 ====================================
 
-See http://docs.dev-auth.com/
+See http://docs.authentise.com/model/reference.html
 
 Example usage
 -------------
