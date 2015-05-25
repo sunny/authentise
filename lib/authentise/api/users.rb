@@ -5,6 +5,17 @@ module Authentise
     module Users
       module_function
 
+      # Create a new user to use the API.
+      #
+      # Params:
+      # - email
+      # - name
+      # - username
+      # - password
+      #
+      # Returns a hash with:
+      # - url: URL to the new user
+      # - uuid: unique id for this user
       def create_user(params)
         url = "https://users.authentise.com/users/"
         RestClient.post(url, params, accept: :json) do |response,
@@ -22,6 +33,14 @@ module Authentise
         end
       end
 
+      # Create a new session to use in other API calls.
+      #
+      # Params:
+      # - username
+      # - password
+      #
+      # Returns a hash with:
+      # - token: cookie token to add to the following API cooke calls
       def create_session(params)
         url = "https://users.authentise.com/sessions/"
         RestClient.post(url, params, accept: :json) do |response,
