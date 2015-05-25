@@ -1,6 +1,7 @@
 require "authentise/api"
 
 module Authentise
+  # TODO: Rename to Streaming
   class Upload
     attr_reader :stl_file, :email, :cents, :currency
 

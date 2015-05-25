@@ -6,14 +6,11 @@ module Authentise
   module API
     class Error < RuntimeError; end
 
-    CREATE_TOKEN_PATH = "api3/api_create_partner_token"
-    UPLOAD_FILE_PATH = "api3/api_upload_partner_stl"
-    STATUS_PATH = "api3/api_get_partner_print_status"
-
     module_function
 
+    # TODO move this in API::Streaming
     def create_token
-      url = "#{host}/#{CREATE_TOKEN_PATH}"
+      url = "#{host}/api3/api_create_partner_token"
       params = {
         api_key: Authentise.configuration.secret_partner_key
       }
@@ -22,8 +19,9 @@ module Authentise
       data["token"]
     end
 
-    def upload_file(file: nil, token: nil, email: nil, cents: nil, currency: "USD")
-      url = "#{host}/#{UPLOAD_FILE_PATH}"
+    # TODO move this in API::Streaming
+    def upload_file(token: nil, file: nil, email: nil, cents: nil, currency: "USD")
+      url = "#{host}/api3/api_upload_partner_stl"
       params = {
         api_key: Authentise.configuration.secret_partner_key,
         token: token,
@@ -42,6 +40,7 @@ module Authentise
       end
     end
 
+    # TODO move this in API::Streaming
     # Returns a status hash for the given token if the print has started.
     # /!\ Do not call this more than once every 15 seconds.
     #
@@ -53,7 +52,7 @@ module Authentise
     # - `confirmed_success`
     # - `confirmed_failure`
     def get_status(token: nil)
-      url = "#{host}/#{STATUS_PATH}"
+      url = "#{host}/api3/api_get_partner_print_status"
       params = {
         api_key: Authentise.configuration.secret_partner_key,
         token: token
@@ -67,6 +66,7 @@ module Authentise
         message: data["message"]
       }
     end
+
 
     private_class_method
 
