@@ -46,12 +46,12 @@ module Authentise
         RestClient.post(url, params, accept: :json) do |response,
                                                         request,
                                                         result|
-          json = JSON.parse(response)
           if response.code == 201
             {
               token: response.cookies["session"]
             }
           else
+            json = JSON.parse(response)
             raise API::Error.new(json["message"])
           end
         end
