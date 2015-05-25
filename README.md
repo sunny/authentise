@@ -59,6 +59,11 @@ To launch specs:
 $ rake
 ```
 
+List other tasks:
+
+```sh
+$ rake -T
+```
 
 License
 -------
