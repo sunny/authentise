@@ -18,9 +18,10 @@ module Authentise
       # - uuid: unique id for this user
       def create_user(params)
         url = "https://users.authentise.com/users/"
-        RestClient.post(url, params, accept: :json) do |response,
-                                                        request,
-                                                        result|
+        options = {
+          accept: :json
+        }
+        RestClient.post(url, params, options) do |response, request, result|
           json = JSON.parse(response)
           if response.code == 201
             {
@@ -43,9 +44,10 @@ module Authentise
       # - token: cookie token to add to the following API cooke calls
       def create_session(params)
         url = "https://users.authentise.com/sessions/"
-        RestClient.post(url, params, accept: :json) do |response,
-                                                        request,
-                                                        result|
+        options = {
+          accept: :json
+        }
+        RestClient.post(url, params, options) do |response, request, result|
           if response.code == 201
             {
               token: response.cookies["session"]

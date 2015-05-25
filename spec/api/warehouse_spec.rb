@@ -86,7 +86,6 @@ describe Authentise::API::Warehouse do
         )
       end
     end
-
   end
 
   describe "get_model" do
@@ -97,7 +96,6 @@ describe Authentise::API::Warehouse do
     it "raises errors" do
       skip
     end
-
   end
 
   describe "get_models" do

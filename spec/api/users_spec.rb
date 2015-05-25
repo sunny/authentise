@@ -59,7 +59,6 @@ describe Authentise::API::Users do
         )
       end
     end
-
   end
 
   describe "create_session" do
@@ -106,6 +105,5 @@ describe Authentise::API::Users do
         )
       end
     end
-
   end
 end
