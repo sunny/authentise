@@ -30,7 +30,7 @@ module Authentise
           json = JSON.parse(response)
           if response.code == 201
             {
-              session_token: response.cookies["session"]
+              token: response.cookies["session"]
             }
           else
             raise API::Error.new(json["message"])

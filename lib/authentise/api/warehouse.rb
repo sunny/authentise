@@ -53,10 +53,7 @@ module Authentise
                                                  request,
                                                  result|
           if response.code == 201
-            {
-              model_url: response.headers[:location],
-              upload_url: response.headers[:x_upload_location]
-            }
+            true
           else
             raise API::Error.new(response)
           end

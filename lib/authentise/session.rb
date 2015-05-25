@@ -18,7 +18,7 @@ module Authentise
         username: username,
         password: password
       )
-      @token = response[:session_token]
+      @token = response[:token]
     end
   end
 end
