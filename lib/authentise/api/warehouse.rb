@@ -34,9 +34,7 @@ module Authentise
           accept: :json,
           cookies: { session: session_token }
         }
-        RestClient.post(url, body, options) do |response,
-                                                request,
-                                                result|
+        RestClient.post(url, body, options) do |response, request, result|
           if response.code == 201
             {
               model_url: response.headers[:location],
@@ -48,10 +46,9 @@ module Authentise
         end
       end
 
-      def put_file(url: nil, file: nil)
-        response = RestClient.put(url, file) do |response,
-                                                 request,
-                                                 result|
+      def put_file(url: nil, path: nil)
+        file = File.read(path)
+        response = RestClient.put(url, file) do |response, request, result|
           if response.code == 201
             true
           else

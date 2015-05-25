@@ -30,7 +30,7 @@ module Authentise
     def send_file(path: nil)
       API::Warehouse.put_file(
         url: upload_url,
-        file: File.open(path)
+        path: path
       )
     end
   end

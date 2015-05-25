@@ -2,6 +2,12 @@ require "spec_helper"
 require "authentise/api/users"
 
 describe Authentise::API::Users do
+  before do
+    @response_error_body = {
+      message: "Some test error"
+    }.to_json
+  end
+
   describe "create_user" do
     before do
       @request_body = {
@@ -40,13 +46,9 @@ describe Authentise::API::Users do
     end
 
     it "raises errors" do
-      response_error_body = {
-        message: "Some test error"
-      }.to_json
-
       stub_request(:post, "https://users.authentise.com/users/")
         .with(body: @request_body, headers: @request_headers)
-        .to_return(status: 400, body: response_error_body)
+        .to_return(status: 400, body: @response_error_body)
 
       assert_raises Authentise::API::Error do
         Authentise::API::Users.create_user(
@@ -93,13 +95,9 @@ describe Authentise::API::Users do
     end
 
     it "raises errors" do
-      response_error_body = {
-        message: "Some test error"
-      }.to_json
-
       stub_request(:post, "https://users.authentise.com/sessions/")
         .with(body: @request_body, headers: @request_headers)
-        .to_return(status: 400, body: response_error_body)
+        .to_return(status: 400, body: @response_error_body)
 
       assert_raises Authentise::API::Error do
         Authentise::API::Users.create_session(
