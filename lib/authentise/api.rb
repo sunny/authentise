@@ -5,6 +5,7 @@ require "authentise/configuration"
 module Authentise
   module API
     class Error < RuntimeError; end
+    class NotFoundError < Error; end
 
     module_function
 

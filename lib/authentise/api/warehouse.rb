@@ -67,32 +67,39 @@ module Authentise
           accept: :json,
           cookies: { session: session_token }
         }
-        response = RestClient.get(url, headers)
-        data = JSON.parse(response)
-        {
-          # The name of the model. (string)
-          name: data["name"],
-          # The current status of the model processing. Can be one of
-          # "processing", "processed", or "error".
-          status: data["status"],
-          # The url of a link at which a snapshot of the model can be
-          # downloaded. (string)
-          snapshot: data["snapshot"],
-          # The url of a link at which a the model can be downloaded.
-          content: data["content"],
-          # Boolean represeting if the model is manifold. If the model is
-          # not manifold, there is a higher likelyhood that slicing will
-          # fail.
-          manifold: data["analyses.manifold"],
-          # The date and time the model was created.
-          created_at: data["created"],
-          # The date and time the model was last updated.
-          updated_at: data["updated"],
-          # An array of model uris from which this model is derived.
-          parents: data["parents"],
-          #  An array of model uris from which are derived from this model.
-          children: data["children"],
-        }
+        RestClient.get(url, headers) do |response, request, result|
+          if response.code == 200
+            data = JSON.parse(response)
+            {
+              # The name of the model. (string)
+              name: data["name"],
+              # The current status of the model processing. Can be one of
+              # "processing", "processed", or "error".
+              status: data["status"],
+              # The url of a link at which a snapshot of the model can be
+              # downloaded. (string)
+              snapshot: data["snapshot"],
+              # The url of a link at which a the model can be downloaded.
+              content: data["content"],
+              # Boolean represeting if the model is manifold. If the model is
+              # not manifold, there is a higher likelyhood that slicing will
+              # fail.
+              manifold: data["analyses.manifold"],
+              # The date and time the model was created.
+              created_at: data["created"],
+              # The date and time the model was last updated.
+              updated_at: data["updated"],
+              # An array of model uris from which this model is derived.
+              parents: data["parents"],
+              #  An array of model uris from which are derived from this model.
+              children: data["children"],
+            }
+          elsif response.code == 404
+            raise Authentise::API::NotFoundError
+          else
+            raise Authentise::API::Error.new("Error #{response.code}")
+          end
+        end
       end
 
 

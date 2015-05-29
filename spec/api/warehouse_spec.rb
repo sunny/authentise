@@ -89,10 +89,9 @@ describe Authentise::API::Warehouse do
   end
 
   describe "get_model" do
-    it "returns a model" do
-      url = "https://models.authentise.com/model/42"
-
-      body = {
+    before do
+      @url = "https://models.authentise.com/model/42"
+      @request_body = {
         name: "Test",
         status: "processing",
         snapshot: "http://example.com/snapshot",
@@ -103,18 +102,19 @@ describe Authentise::API::Warehouse do
         parents: ["http://example.com/model/1", "http://example.com/model/2"],
         children: ["http://example.com/model/1"],
       }.to_json
-
-      request_headers = {
+      @request_headers = {
         "Accept" => "application/json",
         "Content-Type" => "application/json",
         "Cookie" => "session=f56"
       }
+    end
 
-      stub_request(:get, url)
-        .with(headers: request_headers)
-        .to_return(body: body, status: 200)
+    it "returns a model" do
+      stub_request(:get, @url)
+        .with(headers: @request_headers)
+        .to_return(body: @request_body, status: 200)
 
-      response = Authentise::API::Warehouse.get_model(url: url,
+      response = Authentise::API::Warehouse.get_model(url: @url,
                                                       session_token: "f56")
       response.must_equal(
         name: "Test",
@@ -130,7 +130,14 @@ describe Authentise::API::Warehouse do
     end
 
     it "raises errors" do
-      skip
+      stub_request(:get, @url)
+        .with(headers: @request_headers)
+        .to_return(body: "", status: 404)
+
+      assert_raises Authentise::API::NotFoundError do
+        Authentise::API::Warehouse.get_model(url: @url,
+                                             session_token: "f56")
+      end
     end
   end
 
