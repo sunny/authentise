@@ -107,6 +107,7 @@ module Authentise
       # query filters.
       #
       # Params:
+      # - session_token
       # - name: a partial name of models to search for. accepts the
       #   wildcard character: “*”.
       # - status: a status of models to search for.

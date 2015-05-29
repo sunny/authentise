@@ -37,6 +37,7 @@ module Authentise
       )
       @upload_url = response[:upload_url]
       @url = response[:model_url]
+      true
     end
 
     def send_file(path: nil)
@@ -46,19 +47,24 @@ module Authentise
       )
     end
 
-    def self.find_by_url(url)
-      response = API::Warehouse.get_model(url)
+    def fetch(session_token: nil)
+      response = API::Warehouse.get_model(url: url,
+                                          session_token: session_token)
+      self.name = response[:name]
+      self.status = response[:status]
+      self.snapshot = response[:snapshot]
+      self.content = response[:content]
+      self.manifold = response[:manifold]
+      self.created_at = response[:created_at]
+      self.updated_at = response[:updated_at]
+      self.parents = response[:parents]
+      self.children = response[:children]
+      true
+    end
 
-      model = new
-      model.name = response[:name]
-      model.status = response[:status]
-      model.snapshot = response[:snapshot]
-      model.content = response[:content]
-      model.manifold = response[:manifold]
-      model.created_at = response[:created_at]
-      model.updated_at = response[:updated_at]
-      model.parents = response[:parents]
-      model.children = response[:children]
+    def self.find_by_url(url: url, session_token: nil)
+      model = new(url: url)
+      model.fetch(session_token: session_token)
       model
     end
   end
