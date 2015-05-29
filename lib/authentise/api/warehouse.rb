@@ -48,8 +48,11 @@ module Authentise
 
       def put_file(url: nil, path: nil)
         file = File.read(path)
-        response = RestClient.put(url, file) do |response, request, result|
-          if response.code == 201
+        options = {
+          content_type: 'application/octet-stream'
+        }
+        RestClient.put(url, file, options) do |response, request, result|
+          if response.code == 200
             true
           else
             raise API::Error.new(response)

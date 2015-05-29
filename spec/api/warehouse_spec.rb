@@ -15,11 +15,8 @@ describe Authentise::API::Warehouse do
       }
       @request_headers = {
         "Accept" => "application/json",
-        # "Accept-Encoding" => "gzip, deflate",
-        # "Content-Length" => "15",
         "Content-Type" => "application/json",
         "Cookie" => "session=f45k",
-        # "User-Agent" => "Ruby",
       }
       @response_headers = {
         "Location" => "http://example.com/1",
@@ -62,9 +59,12 @@ describe Authentise::API::Warehouse do
     end
 
     it "returns true" do
+      request_headers = {
+        'Content-Type' => 'application/octet-stream'
+      }
       stub_request(:put, "https://example.com/")
-        .with(body: @request_body)
-        .to_return(status: 201)
+        .with(body: @request_body, headers: request_headers)
+        .to_return(status: 200)
 
       response = Authentise::API::Warehouse.put_file(
         url: "https://example.com/",
