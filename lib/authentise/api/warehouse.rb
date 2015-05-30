@@ -102,28 +102,44 @@ module Authentise
       end
 
 
-      # Get a list of all models the requester has access to based on
-      # query filters.
-      #
-      # Params:
-      # - session_token
-      # - name: a partial name of models to search for. accepts the
-      #   wildcard character: “*”.
-      # - status: a status of models to search for.
-      # - created: a creation date to search for models.
-      # - updated: a updated date to search for models.
-      # - sort – one of the other queryable parameters, such as name,
-      #   status, created or updated. accepts + or - to indicate order of
-      #   the sort. parameters may be strung together, separated by commas.
-      #   example: "+status, +created, -name" or "name, created"
-      # def get_models(params)
-      #   url = "#{host}/model/#{uuid}"
-      #   response = RestClient.get(url, params: params)
-      #   data = parse(response)
-      #   {
-      #     # ?
-      #     models: data["models"]
+      # # Get a list of all models the requester has access to based on
+      # # query filters.
+      # #
+      # # Params:
+      # # - session_token
+      # # - name: a partial name of models to search for. accepts the
+      # #   wildcard character: “*”.
+      # # - status: a status of models to search for.
+      # # - created: a creation date to search for models.
+      # # - updated: a updated date to search for models.
+      # # - sort – one of the other queryable parameters, such as name,
+      # #   status, created or updated. accepts + or - to indicate order of
+      # #   the sort. parameters may be strung together, separated by commas.
+      # #   example: "+status, +created, -name" or "name, created"
+      # def get_models(params = {})
+      #   query = params.dup
+      #   session_token = query.delete(:session_token)
+
+      #   url = "https://models.authentise.com/model/"
+      #   options = {
+      #     params: query,
+      #     content_type: :json,
+      #     accept: :json,
+      #     cookies: { session: session_token }
       #   }
+
+      #   RestClient.get(url, options) do |response, request, result|
+      #     if response.code == 200
+      #       data = JSON.parse(response)
+      #       p data
+      #       {
+      #         # ?
+      #         models: data["models"]
+      #       }
+      #     else
+      #       raise Authentise::API::Error.new("Error #{response.code}")
+      #     end
+      #   end
       # end
     end
   end

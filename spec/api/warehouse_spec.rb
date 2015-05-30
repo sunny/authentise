@@ -142,13 +142,54 @@ describe Authentise::API::Warehouse do
     end
   end
 
-  describe "get_models" do
-    it "returns models" do
-      skip
-    end
+  # describe "get_models" do
+  #   before do
+  #     @request_headers = {
+  #       "Accept" => "application/json",
+  #       "Content-Type" => "application/json",
+  #       "Cookie" => "session=e56",
+  #     }
+  #     @response_body = [{
+  #       name: "Test",
+  #       status: "processing",
+  #       snapshot: "http://example.com/snapshot",
+  #       content: "http://example.com/content",
+  #       "analyses.manifold" => true,
+  #       created: "2015-05-29 16:12:12.991340",
+  #       updated: "2015-05-29 16:12:13.991340",
+  #       parents: ["http://example.com/model/1", "http://example.com/model/2"],
+  #       children: ["http://example.com/model/1"],
+  #     }].to_json
+  #   end
 
-    it "raises errors" do
-      skip
-    end
-  end
+  #   it "returns models" do
+  #     stub_request(:get, "https://models.authentise.com/model/").
+  #       with(headers: @request_headers)
+  #       .to_return(body: @response_body, status: 200)
+
+  #     response = Authentise::API::Warehouse.get_models(session_token: "e56")
+  #     response.must_equal [
+  #       {
+  #         name: "Test",
+  #         status: "processing",
+  #         snapshot_url: "http://example.com/snapshot",
+  #         content_url: "http://example.com/content",
+  #         manifold: true,
+  #         created_at: Time.local(2015, 5, 29, 16, 12, 12, 991340),
+  #         updated_at: Time.local(2015, 5, 29, 16, 12, 13, 991340),
+  #         parents_urls: ["http://example.com/model/1",
+  #                        "http://example.com/model/2"],
+  #         children_urls: ["http://example.com/model/1"]
+  #       }
+  #     ]
+  #   end
+
+  #   it "adds query parameters" do
+  #     skip
+  #   end
+
+  #   it "raises errors" do
+  #     skip
+  #   end
+  # end
 end
