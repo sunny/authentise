@@ -76,23 +76,22 @@ module Authentise
               # The current status of the model processing. Can be one of
               # "processing", "processed", or "error".
               status: data["status"],
-              # The url of a link at which a snapshot of the model can be
-              # downloaded. (string)
-              snapshot: data["snapshot"],
-              # The url of a link at which a the model can be downloaded.
-              content: data["content"],
+              # Link at which a snapshot of the model can be downloaded.
+              snapshot_url: data["snapshot"],
+              # Link at which a the model can be downloaded.
+              content_url: data["content"],
               # Boolean represeting if the model is manifold. If the model is
               # not manifold, there is a higher likelyhood that slicing will
               # fail.
               manifold: data["analyses.manifold"],
               # The date and time the model was created.
-              created_at: data["created"],
+              created_at: data["created"] && Time.parse(data["created"]),
               # The date and time the model was last updated.
-              updated_at: data["updated"],
+              updated_at: data["updated"] && Time.parse(data["updated"]),
               # An array of model uris from which this model is derived.
-              parents: data["parents"],
+              parents_urls: data["parents"],
               #  An array of model uris from which are derived from this model.
-              children: data["children"],
+              children_urls: data["children"],
             }
           elsif response.code == 404
             raise Authentise::API::NotFoundError

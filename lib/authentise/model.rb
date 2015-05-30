@@ -13,13 +13,13 @@ module Authentise
 
                   # Available only when model is fetched
                   :status,
-                  :snapshot,
-                  :content,
+                  :snapshot_url,
+                  :content_url,
                   :manifold,
                   :created_at,
                   :updated_at,
-                  :parents,
-                  :children
+                  :parents_urls,
+                  :children_urls
 
 
     def initialize(name: nil,
@@ -50,15 +50,15 @@ module Authentise
     def fetch(session_token: nil)
       response = API::Warehouse.get_model(url: url,
                                           session_token: session_token)
-      self.name = response[:name]
-      self.status = response[:status]
-      self.snapshot = response[:snapshot]
-      self.content = response[:content]
-      self.manifold = response[:manifold]
-      self.created_at = response[:created_at]
-      self.updated_at = response[:updated_at]
-      self.parents = response[:parents]
-      self.children = response[:children]
+      @name = response[:name]
+      @status = response[:status]
+      @snapshot_url = response[:snapshot_url]
+      @content_url = response[:content_url]
+      @manifold = response[:manifold]
+      @parents_urls = response[:parents_urls]
+      @children_urls = response[:children_urls]
+      @created_at = response[:created_at]
+      @updated_at = response[:updated_at]
       true
     end
 

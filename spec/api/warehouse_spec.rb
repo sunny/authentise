@@ -91,41 +91,42 @@ describe Authentise::API::Warehouse do
   describe "get_model" do
     before do
       @url = "https://models.authentise.com/model/42"
-      @request_body = {
-        name: "Test",
-        status: "processing",
-        snapshot: "http://example.com/snapshot",
-        content: "http://example.com/content",
-        "analyses.manifold" => true,
-        created_at: Time.local(2015, 1, 1, 13, 37),
-        updated_at: Time.local(2015, 1, 1, 13, 38),
-        parents: ["http://example.com/model/1", "http://example.com/model/2"],
-        children: ["http://example.com/model/1"],
-      }.to_json
       @request_headers = {
         "Accept" => "application/json",
         "Content-Type" => "application/json",
         "Cookie" => "session=f56"
       }
+      @response_body = {
+        name: "Test",
+        status: "processing",
+        snapshot: "http://example.com/snapshot",
+        content: "http://example.com/content",
+        "analyses.manifold" => true,
+        created: "2015-05-29 16:12:12.991340",
+        updated: "2015-05-29 16:12:13.991340",
+        parents: ["http://example.com/model/1", "http://example.com/model/2"],
+        children: ["http://example.com/model/1"],
+      }.to_json
     end
 
     it "returns a model" do
       stub_request(:get, @url)
         .with(headers: @request_headers)
-        .to_return(body: @request_body, status: 200)
+        .to_return(body: @response_body, status: 200)
 
       response = Authentise::API::Warehouse.get_model(url: @url,
                                                       session_token: "f56")
       response.must_equal(
         name: "Test",
         status: "processing",
-        snapshot: "http://example.com/snapshot",
-        content: "http://example.com/content",
+        snapshot_url: "http://example.com/snapshot",
+        content_url: "http://example.com/content",
         manifold: true,
-        created_at: nil,
-        updated_at: nil,
-        parents: ["http://example.com/model/1", "http://example.com/model/2"],
-        children: ["http://example.com/model/1"]
+        created_at: Time.local(2015, 5, 29, 16, 12, 12, 991340),
+        updated_at: Time.local(2015, 5, 29, 16, 12, 13, 991340),
+        parents_urls: ["http://example.com/model/1",
+                       "http://example.com/model/2"],
+        children_urls: ["http://example.com/model/1"]
       )
     end
 
