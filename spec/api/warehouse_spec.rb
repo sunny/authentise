@@ -90,7 +90,7 @@ describe Authentise::API::Warehouse do
 
   describe "get_model" do
     before do
-      @url = "https://models.authentise.com/model/424242"
+      @url = "https://models.authentise.com/model/424242/"
       @request_headers = {
         "Accept" => "application/json",
         "Content-Type" => "application/json",

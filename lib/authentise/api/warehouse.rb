@@ -63,7 +63,7 @@ module Authentise
       # Get information about a model from its URL.
       # Requires a session token and either a uuid or a url.
       def get_model(url: nil, uuid: nil, session_token: nil)
-        url ||= "https://models.authentise.com/model/#{uuid}"
+        url ||= "https://models.authentise.com/model/#{uuid}/"
         headers = {
           content_type: :json,
           accept: :json,
