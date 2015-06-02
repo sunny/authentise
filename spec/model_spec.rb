@@ -62,6 +62,8 @@ describe Authentise::Model do
   describe "#find_by_url" do
     it "finds a model" do
       api_return = {
+        url: "http://model/4242",
+        uuid: "4242",
         name: "Test 2",
         status: "error",
         snapshot_url: "http://snapshot",
@@ -73,9 +75,10 @@ describe Authentise::Model do
         children_urls: ["http://child1"],
       }
       Authentise::API::Warehouse.stub :get_model, api_return do
-        model = Authentise::Model.find_by_url(url: "http://meh",
+        model = Authentise::Model.find_by_url(url: "http://model/4242",
                                               session_token: "f42")
-        model.url.must_equal "http://meh"
+        model.url.must_equal api_return[:url]
+        model.uuid.must_equal api_return[:uuid]
         model.name.must_equal api_return[:name]
         model.status.must_equal api_return[:status]
         model.snapshot_url.must_equal api_return[:snapshot_url]
@@ -92,6 +95,8 @@ describe Authentise::Model do
   describe "#find_by_uuid" do
     it "finds a model" do
       api_return = {
+        url: "http://model/4242",
+        uuid: "4242",
         name: "Test 2",
         status: "error",
         snapshot_url: "http://snapshot",
@@ -103,9 +108,10 @@ describe Authentise::Model do
         children_urls: ["http://child1"],
       }
       Authentise::API::Warehouse.stub :get_model, api_return do
-        model = Authentise::Model.find_by_uuid(uuid: "42424242",
+        model = Authentise::Model.find_by_uuid(uuid: "4242",
                                               session_token: "f42")
-        model.uuid.must_equal "42424242"
+        model.url.must_equal api_return[:url]
+        model.uuid.must_equal api_return[:uuid]
         model.name.must_equal api_return[:name]
         model.status.must_equal api_return[:status]
         model.snapshot_url.must_equal api_return[:snapshot_url]

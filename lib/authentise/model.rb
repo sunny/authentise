@@ -57,6 +57,8 @@ module Authentise
       response = API::Warehouse.get_model(uuid: uuid,
                                           url: url,
                                           session_token: session_token)
+      @url = response[:url]
+      @uuid = response[:uuid]
       @name = response[:name]
       @status = response[:status]
       @snapshot_url = response[:snapshot_url]

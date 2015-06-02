@@ -73,6 +73,10 @@ module Authentise
           if response.code == 200
             data = JSON.parse(response)
             {
+              # URL to fetch this model
+              url: url,
+              # Identifier for the model
+              uuid: uuid || url.split("/").last,
               # The name of the model. (string)
               name: data["name"],
               # The current status of the model processing. Can be one of

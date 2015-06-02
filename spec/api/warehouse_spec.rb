@@ -117,6 +117,8 @@ describe Authentise::API::Warehouse do
       response = Authentise::API::Warehouse.get_model(url: @url,
                                                       session_token: "f56")
       response.must_equal(
+        url: @url,
+        uuid: "424242",
         name: "Test",
         status: "processing",
         snapshot_url: "http://example.com/snapshot",
@@ -138,6 +140,8 @@ describe Authentise::API::Warehouse do
       response = Authentise::API::Warehouse.get_model(uuid: "424242",
                                                       session_token: "f56")
       response.must_equal(
+        url: @url,
+        uuid: "424242",
         name: "Test",
         status: "processing",
         snapshot_url: "http://example.com/snapshot",
