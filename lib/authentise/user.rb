@@ -29,6 +29,7 @@ module Authentise
       )
       @url = response[:url]
       @uuid = response[:uuid]
+      true
     end
   end
 end
