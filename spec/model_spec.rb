@@ -88,4 +88,34 @@ describe Authentise::Model do
       end
     end
   end
+
+  describe "#find_by_uuid" do
+    it "finds a model" do
+      api_return = {
+        name: "Test 2",
+        status: "error",
+        snapshot_url: "http://snapshot",
+        content_url: "http://content",
+        manifold: true,
+        created_at: Time.local(2015, 1, 1),
+        updated_at: Time.local(2015, 1, 2),
+        parents_urls: ["http://parent1", "http://parent2"],
+        children_urls: ["http://child1"],
+      }
+      Authentise::API::Warehouse.stub :get_model, api_return do
+        model = Authentise::Model.find_by_uuid(uuid: "42424242",
+                                              session_token: "f42")
+        model.uuid.must_equal "42424242"
+        model.name.must_equal api_return[:name]
+        model.status.must_equal api_return[:status]
+        model.snapshot_url.must_equal api_return[:snapshot_url]
+        model.content_url.must_equal api_return[:content_url]
+        model.manifold.must_equal api_return[:manifold]
+        model.created_at.must_equal api_return[:created_at]
+        model.updated_at.must_equal api_return[:updated_at]
+        model.parents_urls.must_equal api_return[:parents_urls]
+        model.children_urls.must_equal api_return[:children_urls]
+      end
+    end
+  end
 end

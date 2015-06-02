@@ -90,7 +90,7 @@ describe Authentise::API::Warehouse do
 
   describe "get_model" do
     before do
-      @url = "https://models.authentise.com/model/42"
+      @url = "https://models.authentise.com/model/424242"
       @request_headers = {
         "Accept" => "application/json",
         "Content-Type" => "application/json",
@@ -115,6 +115,27 @@ describe Authentise::API::Warehouse do
         .to_return(body: @response_body, status: 200)
 
       response = Authentise::API::Warehouse.get_model(url: @url,
+                                                      session_token: "f56")
+      response.must_equal(
+        name: "Test",
+        status: "processing",
+        snapshot_url: "http://example.com/snapshot",
+        content_url: "http://example.com/content",
+        manifold: true,
+        created_at: Time.local(2015, 5, 29, 16, 12, 12, 991340),
+        updated_at: Time.local(2015, 5, 29, 16, 12, 13, 991340),
+        parents_urls: ["http://example.com/model/1",
+                       "http://example.com/model/2"],
+        children_urls: ["http://example.com/model/1"]
+      )
+    end
+
+    it "accepts a uuid instead of a url" do
+      stub_request(:get, @url)
+        .with(headers: @request_headers)
+        .to_return(body: @response_body, status: 200)
+
+      response = Authentise::API::Warehouse.get_model(uuid: "424242",
                                                       session_token: "f56")
       response.must_equal(
         name: "Test",

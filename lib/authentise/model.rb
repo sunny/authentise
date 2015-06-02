@@ -19,15 +19,21 @@ module Authentise
                   :created_at,
                   :updated_at,
                   :parents_urls,
-                  :children_urls
+                  :children_urls,
+
+                  # You can initialize a model with it but it is not available
+                  # when fetched
+                  :uuid
 
 
     def initialize(name: nil,
                    url: nil,
-                   upload_url: nil)
+                   upload_url: nil,
+                   uuid: nil)
       @name = name
       @upload_url = upload_url
       @url = url
+      @uuid = uuid
     end
 
     def create(session_token: nil)
@@ -48,7 +54,8 @@ module Authentise
     end
 
     def fetch(session_token: nil)
-      response = API::Warehouse.get_model(url: url,
+      response = API::Warehouse.get_model(uuid: uuid,
+                                          url: url,
                                           session_token: session_token)
       @name = response[:name]
       @status = response[:status]
@@ -64,6 +71,12 @@ module Authentise
 
     def self.find_by_url(url: url, session_token: nil)
       model = new(url: url)
+      model.fetch(session_token: session_token)
+      model
+    end
+
+    def self.find_by_uuid(uuid: uuid, session_token: nil)
+      model = new(uuid: uuid)
       model.fetch(session_token: session_token)
       model
     end
