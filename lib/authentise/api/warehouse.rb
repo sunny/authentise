@@ -224,7 +224,9 @@ module Authentise
               w: data["w"],
               slice_height: data["slice_height"],
               created_at: data["created"] && Time.parse(data["created"]),
-              content_url: data["content"],
+              content_url: data["content"] &&
+                           data["content"] != "" &&
+                           data["content"],
             }
           elsif response.code == 404
             raise Authentise::API::NotFoundError
