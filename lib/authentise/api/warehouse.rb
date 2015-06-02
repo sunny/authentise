@@ -60,8 +60,7 @@ module Authentise
         end
       end
 
-      # Get information about a model from its URL.
-      # Requires a session token and either a uuid or a url.
+      # Get information about a model from its URL or UUID.
       def get_model(url: nil, uuid: nil, session_token: nil)
         url ||= "https://models.authentise.com/model/#{uuid}/"
         headers = {
@@ -147,6 +146,95 @@ module Authentise
       #     end
       #   end
       # end
+
+
+      # Create a model snapshot.
+      #
+      # Required arguments:
+      # - session_token: for authentication.
+      # - model_uuid: which model to create a snapshot for.
+      #
+      # Optional arguments:
+      # - samples (int) – The number of samples to use in requesting the
+      #                 snapshot. Min 0, Max 5000. Higher numbers will take
+      #                 konger but yield better-looking results
+      # - layer (int) – The number of the layer of the model to show. This
+      #                 allows you to visualize the model when partially printed
+      # - color (string) – The color, in HTML color codes, to use for the
+      #                    material the model is made of. Ex: #AFAA75
+      # - height (int) – The height of the image in pixels. Min 0, Max 768
+      # - width (int) – The width oft he image in pixels. Min 0, Max 1024
+      # - x (float) – The position of the camera on the X axis
+      # - y (float) – The position of the camera on the Y axis
+      # - z (float) – The position of the camera on the Z axis
+      # - u (float) – The camera direction vector’s X component
+      # - v (float) – The camera direction vector’s Y component
+      # - w (float) – The camera direction vector’s Z component
+      # - callback (hash):
+      #   * url (string) – The url to callback to once model processing is
+      #                    finished.
+      #   * method (string) – The http method for the callback to use when
+      #                       calling back.
+      def create_snapshot(arguments = {})
+        params = arguments.dup
+        session_token = params.delete(:session_token)
+        model_uuid = params.delete(:model_uuid)
+
+        url = "https://models.authentise.com/model/#{model_uuid}/snapshot/"
+        body = params.to_json
+        headers = {
+          content_type: :json,
+          accept: :json,
+          cookies: { session: session_token }
+        }
+        RestClient.post(url, body, headers) do |response, request, result|
+          if response.code == 201
+            {
+              url: response.headers[:location],
+            }
+          else
+            raise API::Error.new(JSON.parse(response)["message"])
+          end
+        end
+      end
+
+
+      # Get information about a snapshot from its URL.
+      def get_snapshot(url: nil, session_token: nil)
+        headers = {
+          content_type: :json,
+          accept: :json,
+          cookies: { session: session_token }
+        }
+        RestClient.get(url, headers) do |response, request, result|
+          if response.code == 200
+            data = JSON.parse(response)
+            {
+              status: "snapshot_rendering",
+              samples: data["samples"],
+              layer: data["layer"],
+              color: data["color"],
+              height: data["height"],
+              width: data["width"],
+              x: data["x"],
+              y: data["y"],
+              z: data["z"],
+              u: data["u"],
+              v: data["v"],
+              w: data["w"],
+              slice_height: data["slice_height"],
+              created_at: data["created"] && Time.parse(data["created"]),
+              content_url: data["content"],
+            }
+          elsif response.code == 404
+            raise Authentise::API::NotFoundError
+          else
+            raise Authentise::API::Error.new("Error #{response.code}")
+          end
+        end
+      end
+
+
     end
   end
 end

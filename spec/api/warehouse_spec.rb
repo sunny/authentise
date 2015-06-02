@@ -217,4 +217,116 @@ describe Authentise::API::Warehouse do
   #     skip
   #   end
   # end
+
+  describe "create_snapshot" do
+    before do
+      @request_body = {
+        samples: 1,
+        layer: 10,
+        color: "#ff7f00",
+        height: 480,
+        width: 640,
+        x: 0,
+        y: 1,
+        z: 2,
+        u: 3,
+        v: 4,
+        w: 5,
+        callback: { url: "http://my.example.com/processing/done",
+                    method: "POST" }
+      }
+      @request_headers = {
+        "Accept" => "application/json",
+        "Content-Type" => "application/json",
+        "Cookie" => "session=f00",
+      }
+    end
+
+    it "returns snapshot data" do
+      response_headers = {
+        "Location" => "http://example.com/model/4242/snapshot/1212/"
+      }
+
+      stub_request(:post, "https://models.authentise.com/model/4242/snapshot/")
+        .with(body: @request_body, headers: @request_headers)
+        .to_return(status: 201, headers: response_headers)
+
+      response = Authentise::API::Warehouse.create_snapshot(
+        session_token: "f00",
+        model_uuid: "4242",
+        samples: 1,
+        layer: 10,
+        color: "#ff7f00",
+        height: 480,
+        width: 640,
+        x: 0,
+        y: 1,
+        z: 2,
+        u: 3,
+        v: 4,
+        w: 5,
+        callback: { url: "http://my.example.com/processing/done",
+                    method: "POST" }
+      )
+
+      response.must_equal(
+        url: "http://example.com/model/4242/snapshot/1212/"
+      )
+    end
+  end
+
+  describe "get_snapshot" do
+    before do
+      @request_headers = {
+        "Accept" => "application/json",
+        "Content-Type" => "application/json",
+        "Cookie" => "session=z90",
+      }
+      @response_body = {
+        status: "snapshot_rendering",
+        samples: 1,
+        layer: 1,
+        color: "#ff7f00",
+        height: 480,
+        width: 640,
+        x: 0,
+        y: 1,
+        z: 2,
+        u: 3,
+        v: 4,
+        w: 5,
+        slice_height: nil,
+        created: "2015-05-13 22:18:22.658536",
+        content: "https://example.com/content_url"
+      }.to_json
+    end
+
+    it "returns snapshot data" do
+      stub_request(:get, "https://models.authentise.com/model/42/snapshot/43/")
+        .with(headers: @request_headers)
+        .to_return(status: 200, body: @response_body)
+
+      response = Authentise::API::Warehouse.get_snapshot(
+        url: "https://models.authentise.com/model/42/snapshot/43/",
+        session_token: "z90"
+      )
+      response.must_equal(
+        status: "snapshot_rendering",
+        samples: 1,
+        layer: 1,
+        color: "#ff7f00",
+        height: 480,
+        width: 640,
+        x: 0,
+        y: 1,
+        z: 2,
+        u: 3,
+        v: 4,
+        w: 5,
+        slice_height: nil,
+        created_at: Time.local(2015, 05, 13, 22, 18, 22, 658536),
+        content_url: "https://example.com/content_url"
+      )
+    end
+  end
 end
