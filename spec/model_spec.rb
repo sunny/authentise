@@ -34,6 +34,8 @@ describe Authentise::Model do
   describe "#fetch" do
     it "calls the API and sets what is returned" do
       api_return = {
+        url: "http://self",
+        uuid: "4242",
         name: "Test 2",
         status: "error",
         snapshot_url: "http://snapshot",
@@ -45,7 +47,11 @@ describe Authentise::Model do
         children_urls: ["http://child1"],
       }
       Authentise::API::Warehouse.stub :get_model, api_return do
-        model.fetch(session_token: "f56").must_equal true
+        result = model.fetch(session_token: "f56")
+
+        result.must_equal true
+        model.url.must_equal api_return[:url]
+        model.uuid.must_equal api_return[:uuid]
         model.name.must_equal api_return[:name]
         model.status.must_equal api_return[:status]
         model.snapshot_url.must_equal api_return[:snapshot_url]

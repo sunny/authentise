@@ -19,6 +19,7 @@ module Authentise
         password: password
       )
       @token = response[:token]
+      true
     end
   end
 end
