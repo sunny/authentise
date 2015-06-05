@@ -83,7 +83,7 @@ module Authentise
         }
         API::Warehouse.stub :get_model, api_return do
           model = Model.find_by_url(url: "http://model/4242",
-                                                session_token: "f42")
+                                    session_token: "f42")
           model.url.must_equal api_return[:url]
           model.uuid.must_equal api_return[:uuid]
           model.name.must_equal api_return[:name]
@@ -116,7 +116,7 @@ module Authentise
         }
         API::Warehouse.stub :get_model, api_return do
           model = Model.find_by_uuid(uuid: "4242",
-                                                session_token: "f42")
+                                     session_token: "f42")
           model.url.must_equal api_return[:url]
           model.uuid.must_equal api_return[:uuid]
           model.name.must_equal api_return[:name]

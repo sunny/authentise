@@ -6,8 +6,8 @@ module Authentise
   describe Upload do
     let(:upload) {
       Upload.new(email: "example@example.com",
-                                       currency: "EUR",
-                                       cents: 1_00)
+                 currency: "EUR",
+                 cents: 1_00)
     }
 
     describe "#token" do

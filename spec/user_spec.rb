@@ -3,9 +3,9 @@ require "spec_helper"
 module Authentise
   describe User do
     let(:user) { User.new(email: "foo@foo.com",
-                                      name: "Bob",
-                                      username: "bob",
-                                      password: "builder") }
+                          name: "Bob",
+                          username: "bob",
+                          password: "builder") }
 
     describe "#email" do
       it { user.email.must_equal "foo@foo.com" }
