@@ -23,7 +23,7 @@ module Authentise
           content_type: :json,
           accept: :json,
         }
-        RestClient.post(url, body, options) do |response, request, result|
+        RestClient.post(url, body, options) do |response, _request, _result|
           if response.code == 201
             {
               url: response.headers[:x_token_location]

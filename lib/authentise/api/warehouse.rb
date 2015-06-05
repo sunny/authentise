@@ -34,7 +34,7 @@ module Authentise
           accept: :json,
           cookies: { session: session_token }
         }
-        RestClient.post(url, body, options) do |response, request, result|
+        RestClient.post(url, body, options) do |response, _request, _result|
           if response.code == 201
             {
               model_url: response.headers[:location],
@@ -51,7 +51,7 @@ module Authentise
         options = {
           content_type: 'application/octet-stream'
         }
-        RestClient.put(url, file, options) do |response, request, result|
+        RestClient.put(url, file, options) do |response, _request, _result|
           if response.code == 200
             true
           else
@@ -68,7 +68,7 @@ module Authentise
           accept: :json,
           cookies: { session: session_token }
         }
-        RestClient.get(url, headers) do |response, request, result|
+        RestClient.get(url, headers) do |response, _request, _result|
           if response.code == 200
             data = JSON.parse(response)
             {
@@ -187,7 +187,7 @@ module Authentise
           accept: :json,
           cookies: { session: session_token }
         }
-        RestClient.post(url, body, headers) do |response, request, result|
+        RestClient.post(url, body, headers) do |response, _request, _result|
           if response.code == 201
             {
               url: response.headers[:location],
@@ -206,7 +206,7 @@ module Authentise
           accept: :json,
           cookies: { session: session_token }
         }
-        RestClient.get(url, headers) do |response, request, result|
+        RestClient.get(url, headers) do |response, _request, _result|
           if response.code == 200
             data = JSON.parse(response)
             {

@@ -21,7 +21,7 @@ module Authentise
         options = {
           accept: :json
         }
-        RestClient.post(url, params, options) do |response, request, result|
+        RestClient.post(url, params, options) do |response, _request, _result|
           json = JSON.parse(response)
           if response.code == 201
             {
@@ -47,7 +47,7 @@ module Authentise
         options = {
           accept: :json
         }
-        RestClient.post(url, params, options) do |response, request, result|
+        RestClient.post(url, params, options) do |response, _request, _result|
           if response.code == 201
             {
               token: response.cookies["session"]
