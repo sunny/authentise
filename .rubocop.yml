@@ -1,0 +1,29 @@
+AllCops:
+  Exclude:
+    - examples_*
+
+Metrics/MethodLength:
+  Max: 24
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/Documentation:
+  Exclude:
+    - lib/authentise/version.rb
+    - spec/**/*
+
+Style/EmptyLines:
+  Enabled: false
+
+Style/EmptyLinesAroundBlockBody:
+  Enabled: false
+
+Style/EmptyLinesAroundModuleBody:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/TrailingComma:
+  EnforcedStyleForMultiline: comma
