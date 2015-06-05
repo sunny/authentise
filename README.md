@@ -95,6 +95,18 @@ model.status # => "processing"
 model.content_url # => ""https://prod-hoth-models.s3.amazonaws.com:443/07c74a…"
 ```
 
+### Streaming iframe
+
+```rb
+# Create a print
+print = Authentise::Print.new(
+  model_url: "https://models.authentise.com/model/42424…"
+)
+
+# Show an iframe to this URL to the user
+print.token_url
+# => "https://widget.sendshapes.com/?token=33b41d6e80d4918cfff768185d1d31a6"
+
 
 Development
 -----------
