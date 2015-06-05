@@ -21,7 +21,11 @@ module Authentise
     end
 
     # DEPRECATED, use Authentise::API::Print.create_token(…)
-    def upload_file(token: nil, file: nil, email: nil, cents: nil, currency: "USD")
+    def upload_file(token: nil,
+                    file: nil,
+                    email: nil,
+                    cents: nil,
+                    currency: "USD")
       url = "#{host}/api3/api_upload_partner_stl"
       params = {
         api_key: Authentise.configuration.secret_partner_key,

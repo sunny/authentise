@@ -12,7 +12,10 @@ Gem::Specification.new do |s|
   s.description = "Access Authentise's 3D-Printing streaming API"
   s.license     = "MIT"
 
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  s.files = Dir["{app,config,db,lib}/**/*",
+                "MIT-LICENSE",
+                "Rakefile",
+                "README.md"]
   s.test_files = Dir["spec/**/*"]
 
   s.add_dependency "rest-client"

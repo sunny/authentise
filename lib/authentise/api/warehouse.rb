@@ -14,9 +14,11 @@ module Authentise
       # - allowed_transformations (hash) – Optional. The transformations that
       #   are allowed on this model.
       #   * resize (boolean) – Optional. true if this
-      #     model is allowed to be resized automatically by other services. Default: false.
+      #     model is allowed to be resized automatically by other services.
+      #     Default: false.
       #   * rotation (boolean) – Optional. true if
-      #     this model is allowed to be rotated automatically by other services. Default: false.
+      #     this model is allowed to be rotated automatically by other services.
+      #     Default: false.
       #
       # - callback (hash) – Optional. The URL to call when this model changes
       #   states.

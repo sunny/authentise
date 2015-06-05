@@ -3,7 +3,9 @@ require "spec_helper"
 describe Authentise::API do
   describe ".create_token" do
     it "returns a token from the API" do
-      stub_request(:get, "https://widget.sendshapes.com:3443/api3/api_create_partner_token?api_key=test")
+      api_url = "https://widget.sendshapes.com:3443/api3/" \
+                + "api_create_partner_token?api_key=test"
+      stub_request(:get, api_url)
         .to_return(status: 200, body: '{"data":{"token":"meh"}}')
 
       Authentise::API.create_token.must_equal "meh"
@@ -53,7 +55,8 @@ describe Authentise::API do
 
   describe ".get_status" do
     it "returns a status hash" do
-      api_url = "https://widget.sendshapes.com:3443/api3/api_get_partner_print_status?api_key=test&token=meh"
+      api_url = "https://widget.sendshapes.com:3443/api3/" \
+                + "api_get_partner_print_status?api_key=test&token=meh"
 
       response_body = {
         status: { code: "ok" },
