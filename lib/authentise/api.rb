@@ -9,7 +9,7 @@ module Authentise
 
     module_function
 
-    # TODO move this in API::Streaming
+    # DEPRECATED, use Authentise::API::Print.create_token(…)
     def create_token
       url = "#{host}/api3/api_create_partner_token"
       params = {
@@ -20,7 +20,7 @@ module Authentise
       data["token"]
     end
 
-    # TODO move this in API::Streaming
+    # DEPRECATED, use Authentise::API::Print.create_token(…)
     def upload_file(token: nil, file: nil, email: nil, cents: nil, currency: "USD")
       url = "#{host}/api3/api_upload_partner_stl"
       params = {
@@ -41,7 +41,7 @@ module Authentise
       end
     end
 
-    # TODO move this in API::Streaming
+    # DEPRECATED
     # Returns a status hash for the given token if the print has started.
     # /!\ Do not call this more than once every 15 seconds.
     #
@@ -68,8 +68,7 @@ module Authentise
       }
     end
 
-
-    private_class_method
+    # private
 
     def parse(response)
       json = JSON.parse(response)
@@ -81,6 +80,7 @@ module Authentise
         fail Error, "JSON with no data: #{response}"
       end
     end
+    private_class_method :parse
 
     def host
       if Authentise.configuration.use_ssl
@@ -89,5 +89,6 @@ module Authentise
         "http://widget.sendshapes.com:3000"
       end
     end
+    private_class_method :host
   end
 end
