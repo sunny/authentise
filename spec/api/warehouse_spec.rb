@@ -123,8 +123,8 @@ describe Authentise::API::Warehouse do
         snapshot_url: "http://example.com/snapshot",
         content_url: "http://example.com/content",
         manifold: true,
-        created_at: Time.local(2015, 5, 29, 16, 12, 12, 991340),
-        updated_at: Time.local(2015, 5, 29, 16, 12, 13, 991340),
+        created_at: Time.local(2015, 5, 29, 16, 12, 12, 991_340),
+        updated_at: Time.local(2015, 5, 29, 16, 12, 13, 991_340),
         parents_urls: ["http://example.com/model/1",
                        "http://example.com/model/2"],
         children_urls: ["http://example.com/model/1"]
@@ -146,8 +146,8 @@ describe Authentise::API::Warehouse do
         snapshot_url: "http://example.com/snapshot",
         content_url: "http://example.com/content",
         manifold: true,
-        created_at: Time.local(2015, 5, 29, 16, 12, 12, 991340),
-        updated_at: Time.local(2015, 5, 29, 16, 12, 13, 991340),
+        created_at: Time.local(2015, 5, 29, 16, 12, 12, 991_340),
+        updated_at: Time.local(2015, 5, 29, 16, 12, 13, 991_340),
         parents_urls: ["http://example.com/model/1",
                        "http://example.com/model/2"],
         children_urls: ["http://example.com/model/1"]
@@ -322,7 +322,7 @@ describe Authentise::API::Warehouse do
         v: 4,
         w: 5,
         slice_height: nil,
-        created_at: Time.local(2015, 05, 13, 22, 18, 22, 658536),
+        created_at: Time.local(2015, 05, 13, 22, 18, 22, 658_536),
         content_url: "https://example.com/content_url"
       )
     end
