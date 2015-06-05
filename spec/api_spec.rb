@@ -54,12 +54,7 @@ describe Authentise::API do
   describe ".get_status" do
     it "returns a status hash" do
       api_url = "https://widget.sendshapes.com:3443/api3/api_get_partner_print_status?api_key=test&token=meh"
-      request_body = { "api_key" => "test",
-                       "print_value" => "100",
-                       "print_value_currency" => "EUR",
-                       "receiver_email" => "example@example.com",
-                       "stl_file" => "",
-                       "token"=>"meh"}
+
       response_body = {
         status: { code: "ok" },
         data: {
