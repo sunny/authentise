@@ -2,8 +2,10 @@ require "spec_helper"
 
 module Authentise
   describe Session do
-    let(:session) { Session.new(username: "bob",
-                                password: "builder") }
+    let(:session) do
+      Session.new(username: "bob",
+                  password: "builder")
+    end
 
     describe "#username" do
       it { session.username.must_equal "bob" }

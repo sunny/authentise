@@ -4,11 +4,11 @@ require "spec_helper"
 
 module Authentise
   describe Upload do
-    let(:upload) {
+    let(:upload) do
       Upload.new(email: "example@example.com",
                  currency: "EUR",
                  cents: 1_00)
-    }
+    end
 
     describe "#token" do
       it "returns a token from the API" do
