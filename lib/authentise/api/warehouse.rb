@@ -2,6 +2,7 @@ require "authentise/api"
 
 module Authentise
   module API
+    # Upload models and take snapshot pictures
     module Warehouse
       module_function
 

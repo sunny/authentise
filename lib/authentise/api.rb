@@ -3,8 +3,12 @@ require "rest-client"
 require "authentise/configuration"
 
 module Authentise
+  # Module for all API-Related
   module API
+    # Common Error
     class Error < RuntimeError; end
+
+    # 404 Error
     class NotFoundError < Error; end
 
     module_function

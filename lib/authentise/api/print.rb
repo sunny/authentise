@@ -2,6 +2,7 @@ require "authentise/api"
 
 module Authentise
   module API
+    # Calls to the print streaming API
     module Print
       module_function
 

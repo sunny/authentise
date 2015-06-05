@@ -1,6 +1,16 @@
+# Configure your application using this construct:
+#
+#   Authentise.configure do |c|
+#     c.secret_partner_key = "…"
+#   end
 module Authentise
+  # Store the config
   class Configuration
+    # The partner key Authentise gave you
     attr_accessor :secret_partner_key
+
+    # DEPRECATED
+    # Switch off the use of SSL for the old streaming API
     attr_accessor :use_ssl
 
     def initialize

@@ -2,6 +2,7 @@ require "authentise/api"
 
 module Authentise
   module API
+    # Calls to create a user and authenticate over the API
     module Users
       module_function
 
