@@ -70,34 +70,7 @@ module Authentise
         }
         RestClient.get(url, headers) do |response, _request, _result|
           if response.code == 200
-            data = JSON.parse(response)
-            {
-              # URL to fetch this model
-              url: url,
-              # Identifier for the model
-              uuid: uuid || url.split("/").last,
-              # The name of the model. (string)
-              name: data["name"],
-              # The current status of the model processing. Can be one of
-              # "processing", "processed", or "error".
-              status: data["status"],
-              # Link at which a snapshot of the model can be downloaded.
-              snapshot_url: data["snapshot"],
-              # Link at which a the model can be downloaded.
-              content_url: data["content"],
-              # Boolean represeting if the model is manifold. If the model is
-              # not manifold, there is a higher likelyhood that slicing will
-              # fail.
-              manifold: data["analyses.manifold"],
-              # The date and time the model was created.
-              created_at: data["created"] && Time.parse(data["created"]),
-              # The date and time the model was last updated.
-              updated_at: data["updated"] && Time.parse(data["updated"]),
-              # An array of model uris from which this model is derived.
-              parents_urls: data["parents"],
-              #  An array of model uris from which are derived from this model.
-              children_urls: data["children"],
-            }
+            parse_model(response, url)
           elsif response.code == 404
             raise Authentise::API::NotFoundError
           else
@@ -208,26 +181,7 @@ module Authentise
         }
         RestClient.get(url, headers) do |response, _request, _result|
           if response.code == 200
-            data = JSON.parse(response)
-            {
-              status: "snapshot_rendering",
-              samples: data["samples"],
-              layer: data["layer"],
-              color: data["color"],
-              height: data["height"],
-              width: data["width"],
-              x: data["x"],
-              y: data["y"],
-              z: data["z"],
-              u: data["u"],
-              v: data["v"],
-              w: data["w"],
-              slice_height: data["slice_height"],
-              created_at: data["created"] && Time.parse(data["created"]),
-              content_url: data["content"] &&
-                           data["content"] != "" &&
-                           data["content"],
-            }
+            parse_snapshot(response)
           elsif response.code == 404
             raise Authentise::API::NotFoundError
           else
@@ -237,6 +191,65 @@ module Authentise
       end
 
 
+      def parse_model(response, url)
+        data = JSON.parse(response)
+        {
+          # URL to fetch this model
+          url: url,
+          # Identifier for the model
+          uuid: url.split("/").last,
+          # The name of the model. (string)
+          name: data["name"],
+          # The current status of the model processing. Can be one of
+          # "processing", "processed", or "error".
+          status: data["status"],
+          # Link at which a snapshot of the model can be downloaded.
+          snapshot_url: data["snapshot"],
+          # Link at which a the model can be downloaded.
+          content_url: data["content"],
+          # Boolean represeting if the model is manifold. If the model is
+          # not manifold, there is a higher likelyhood that slicing will
+          # fail.
+          manifold: data["analyses.manifold"],
+          # The date and time the model was created.
+          created_at: parse_time(data["created"]),
+          # The date and time the model was last updated.
+          updated_at: parse_time(data["updated"]),
+          # An array of model uris from which this model is derived.
+          parents_urls: data["parents"],
+          #  An array of model uris from which are derived from this model.
+          children_urls: data["children"],
+        }
+      end
+      private_class_method :parse_model
+
+      # rubocop:disable Metrics/AbcSize
+      def parse_snapshot(response)
+        data = JSON.parse(response)
+        {
+          status: "snapshot_rendering",
+          samples: data["samples"],
+          layer: data["layer"],
+          color: data["color"],
+          height: data["height"],
+          width: data["width"],
+          x: data["x"],
+          y: data["y"],
+          z: data["z"],
+          u: data["u"],
+          v: data["v"],
+          w: data["w"],
+          slice_height: data["slice_height"],
+          created_at: parse_time(data["created"]),
+          content_url: data["content"],
+        }
+      end
+      # rubocop:enable Metrics/AbcSize
+
+      def parse_time(string)
+        string && Time.parse(string)
+      end
+      private_class_method :parse_time
     end
   end
 end

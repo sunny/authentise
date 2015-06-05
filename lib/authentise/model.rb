@@ -53,6 +53,7 @@ module Authentise
       )
     end
 
+    # rubocop:disable Metrics/AbcSize
     def fetch(session_token: nil)
       response = API::Warehouse.get_model(uuid: uuid,
                                           url: url,
@@ -70,6 +71,7 @@ module Authentise
       @updated_at = response[:updated_at]
       true
     end
+    # rubocop:enable Metrics/AbcSize
 
     def self.find_by_url(url: url, session_token: nil)
       model = new(url: url)
