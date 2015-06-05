@@ -30,7 +30,7 @@ module Authentise
               uuid: json["uuid"]
             }
           else
-            raise API::Error.new(json["message"])
+            raise API::Error, json["message"]
           end
         end
       end
@@ -55,7 +55,7 @@ module Authentise
             }
           else
             json = JSON.parse(response)
-            raise API::Error.new(json["message"])
+            raise API::Error, json["message"]
           end
         end
       end

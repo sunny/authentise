@@ -28,7 +28,7 @@ module Authentise
           if response.code == 201
             { url: response.headers[:x_token_location] }
           else
-            raise API::Error.new(JSON.parse(response)["message"])
+            raise API::Error, JSON.parse(response)["message"]
           end
         end
       end

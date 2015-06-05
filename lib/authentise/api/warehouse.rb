@@ -44,7 +44,7 @@ module Authentise
               upload_url: response.headers[:x_upload_location]
             }
           else
-            raise API::Error.new(JSON.parse(response)["message"])
+            raise API::Error, JSON.parse(response)["message"]
           end
         end
       end
@@ -58,7 +58,7 @@ module Authentise
           if response.code == 200
             true
           else
-            raise API::Error.new(response)
+            raise API::Error, response
           end
         end
       end
@@ -77,7 +77,7 @@ module Authentise
           elsif response.code == 404
             raise Authentise::API::NotFoundError
           else
-            raise Authentise::API::Error.new("Error #{response.code}")
+            raise Authentise::API::Error, "Error #{response.code}"
           end
         end
       end
@@ -118,7 +118,7 @@ module Authentise
       #         models: data["models"]
       #       }
       #     else
-      #       raise Authentise::API::Error.new("Error #{response.code}")
+      #       raise Authentise::API::Error, "Error #{response.code}"
       #     end
       #   end
       # end
@@ -169,7 +169,7 @@ module Authentise
               url: response.headers[:location],
             }
           else
-            raise API::Error.new(JSON.parse(response)["message"])
+            raise API::Error, JSON.parse(response)["message"]
           end
         end
       end
@@ -188,7 +188,7 @@ module Authentise
           elsif response.code == 404
             raise Authentise::API::NotFoundError
           else
-            raise Authentise::API::Error.new("Error #{response.code}")
+            raise Authentise::API::Error, "Error #{response.code}"
           end
         end
       end
