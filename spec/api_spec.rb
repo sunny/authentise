@@ -20,7 +20,7 @@ describe Authentise::API do
                        "print_value_currency" => "EUR",
                        "receiver_email" => "example@example.com",
                        "stl_file" => "",
-                       "token"=>"meh" }
+                       "token" => "meh" }
       request_headers = { "Accept" => "application/json" }
 
       response_body = '{"data":{"ssl_token_link":"https://bah"}}'
