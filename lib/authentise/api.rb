@@ -76,7 +76,7 @@ module Authentise
 
     def parse(response)
       json = JSON.parse(response)
-      if json["status"] and json["status"]["code"] != "ok"
+      if json["status"] && json["status"]["code"] != "ok"
         fail Error, json["status"]["extended_description"]
       elsif json["data"]
         json["data"]
