@@ -26,7 +26,7 @@ module Authentise
         RestClient.post(url, body, options) do |response, request, result|
           if response.code == 201
             {
-              token_url: response.headers[:x_token_location]
+              url: response.headers[:x_token_location]
             }
           else
             raise API::Error.new(JSON.parse(response)["message"])

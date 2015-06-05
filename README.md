@@ -104,7 +104,7 @@ print = Authentise::Print.new(
 )
 
 # Show an iframe to this URL to the user
-print.token_url
+print.url
 # => "https://widget.sendshapes.com/?token=33b41d6e80d4918cfff768185d1d31a6"
 
 

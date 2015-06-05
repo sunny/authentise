@@ -19,8 +19,7 @@ describe Authentise::API::Print do
         "Content-Type" => "application/json",
       }
       @response_headers = {
-        "Location" => "http://example.com/1",
-        "X-Upload-Location" => "http://example.com/2",
+        "X-Token-Location" => "http://example.com/token",
       }
     end
 
@@ -31,6 +30,10 @@ describe Authentise::API::Print do
 
       returned = Authentise::API::Print.create_token(
         model_url: "http://example.com/model/42"
+      )
+
+      returned.must_equal(
+        url: "http://example.com/token"
       )
     end
 

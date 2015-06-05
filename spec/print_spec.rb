@@ -11,13 +11,13 @@ module Authentise
       it { print.model_url.must_equal "https://example.com/model/1" }
     end
 
-    describe "#token_url" do
+    describe "#url" do
       it "returns a url from the API" do
         response = {
-          token_url: "https://bah",
+          url: "https://bah",
         }
         API::Print.stub :create_token, response do
-          print.token_url.must_equal "https://bah"
+          print.url.must_equal "https://bah"
         end
       end
     end

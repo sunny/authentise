@@ -9,12 +9,12 @@ module Authentise
       @model_url = model_url
     end
 
-    def token_url
+    def url
       @token_url ||= begin
         response = API::Print.create_token(
           model_url: model_url
         )
-        response[:token_url]
+        response[:url]
       end
     end
   end
