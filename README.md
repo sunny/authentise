@@ -27,35 +27,6 @@ end
 Usage
 ------
 
-### Streaming iframe
-
-```rb
-# Upload a file
-upload = Authentise::Upload.new(
-  stl_file: File.new("example.stl", "rb"),
-  email: "example@example.com",
-  cents: 2_00,
-  currency: "EUR"
-)
-
-# Keep this token around
-upload.token
-# => "33b41d6e80d4918cfff768185d1d31a6"
-
-# Show this iframe to the user
-upload.link_url
-# => "https://widget.sendshapes.com/?token=33b41d6e80d4918cfff768185d1d31a6"
-
-# Check for the status periodically
-upload.status
-# => {
-#  printing_job_status_name: "warming_up",
-#  printing_percentage: 0,
-#  minutes_left: 21,
-#  message: ""
-# }
-```
-
 ### Authentication
 
 ```rb
