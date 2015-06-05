@@ -24,7 +24,7 @@ module Authentise
     def url
       @token_url ||= begin
         response = API::Print.create_token(
-          model_url: model_url
+          model_url: model_url,
         )
         response[:url]
       end

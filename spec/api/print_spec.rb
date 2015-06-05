@@ -4,7 +4,7 @@ require "authentise/api/print"
 describe Authentise::API::Print do
   before do
     @response_error_body = {
-      message: "Some test error"
+      message: "Some test error",
     }.to_json
   end
 
@@ -16,7 +16,7 @@ describe Authentise::API::Print do
         receiver_email: "example@example.com",
         print_value: 42,
         print_value_currency: "EUR",
-        partner_job_id: 43
+        partner_job_id: 43,
       }.to_json
       @request_headers = {
         "Accept" => "application/json",
@@ -37,11 +37,11 @@ describe Authentise::API::Print do
         receiver_email: "example@example.com",
         print_value: 42,
         print_value_currency: "EUR",
-        partner_job_id: 43
+        partner_job_id: 43,
       )
 
       returned.must_equal(
-        url: "http://example.com/token"
+        url: "http://example.com/token",
       )
     end
 
@@ -51,7 +51,7 @@ describe Authentise::API::Print do
 
       assert_raises Authentise::API::Error do
         Authentise::API::Print.create_token(
-          model_url: "http://example.com/model/42"
+          model_url: "http://example.com/model/42",
         )
       end
     end

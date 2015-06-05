@@ -25,7 +25,7 @@ module Authentise
         email: email,
         name: name,
         username: username,
-        password: password
+        password: password,
       )
       @url = response[:url]
       @uuid = response[:uuid]

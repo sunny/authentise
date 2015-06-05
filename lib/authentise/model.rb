@@ -39,7 +39,7 @@ module Authentise
     def create(session_token: nil)
       response = API::Warehouse.create_model(
         session_token: session_token,
-        name: name
+        name: name,
       )
       @upload_url = response[:upload_url]
       @url = response[:model_url]
@@ -49,7 +49,7 @@ module Authentise
     def send_file(path: nil)
       API::Warehouse.put_file(
         url: upload_url,
-        path: path
+        path: path,
       )
     end
 

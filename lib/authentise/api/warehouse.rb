@@ -30,18 +30,18 @@ module Authentise
       def create_model(session_token: nil, name: nil)
         url = "https://models.authentise.com/model/"
         body = {
-          name: name
+          name: name,
         }.to_json
         options = {
           content_type: :json,
           accept: :json,
-          cookies: { session: session_token }
+          cookies: { session: session_token },
         }
         RestClient.post(url, body, options) do |response, _request, _result|
           if response.code == 201
             {
               model_url: response.headers[:location],
-              upload_url: response.headers[:x_upload_location]
+              upload_url: response.headers[:x_upload_location],
             }
           else
             fail API::Error, JSON.parse(response)["message"]
@@ -52,7 +52,7 @@ module Authentise
       def put_file(url: nil, path: nil)
         file = File.read(path)
         options = {
-          content_type: 'application/octet-stream'
+          content_type: 'application/octet-stream',
         }
         RestClient.put(url, file, options) do |response, _request, _result|
           if response.code == 200
@@ -69,7 +69,7 @@ module Authentise
         headers = {
           content_type: :json,
           accept: :json,
-          cookies: { session: session_token }
+          cookies: { session: session_token },
         }
         RestClient.get(url, headers) do |response, _request, _result|
           if response.code == 200
@@ -161,7 +161,7 @@ module Authentise
         headers = {
           content_type: :json,
           accept: :json,
-          cookies: { session: session_token }
+          cookies: { session: session_token },
         }
         RestClient.post(url, body, headers) do |response, _request, _result|
           if response.code == 201
@@ -180,7 +180,7 @@ module Authentise
         headers = {
           content_type: :json,
           accept: :json,
-          cookies: { session: session_token }
+          cookies: { session: session_token },
         }
         RestClient.get(url, headers) do |response, _request, _result|
           if response.code == 200

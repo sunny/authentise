@@ -29,7 +29,7 @@ module Authentise
       it "assigns a token from the API" do
         response = {
           url: "http://exampkle.com/user/4242/",
-          uuid: "4242"
+          uuid: "4242",
         }
         API::Users.stub :create_user, response do
           result = user.create

@@ -17,7 +17,7 @@ module Authentise
     def create_token
       url = "#{host}/api3/api_create_partner_token"
       params = {
-        api_key: Authentise.configuration.secret_partner_key
+        api_key: Authentise.configuration.secret_partner_key,
       }
       response = RestClient.get(url, params: params)
       data = parse(response)
@@ -37,7 +37,7 @@ module Authentise
         receiver_email: email,
         print_value: cents,
         print_value_currency: currency,
-        stl_file: file
+        stl_file: file,
       }
       response = RestClient.post(url, params, accept: :json)
       data = parse(response)
@@ -64,7 +64,7 @@ module Authentise
       url = "#{host}/api3/api_get_partner_print_status"
       params = {
         api_key: Authentise.configuration.secret_partner_key,
-        token: token
+        token: token,
       }
       response = RestClient.get(url, params: params)
       data = parse(response)
@@ -72,7 +72,7 @@ module Authentise
         printing_job_status_name: data["printing_job_status_name"].downcase,
         printing_percentage: data["printing_percentage"],
         minutes_left: data["minutes_left"],
-        message: data["message"]
+        message: data["message"],
       }
     end
 

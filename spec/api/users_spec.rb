@@ -4,7 +4,7 @@ require "authentise/api/users"
 describe Authentise::API::Users do
   before do
     @response_error_body = {
-      message: "Some test error"
+      message: "Some test error",
     }.to_json
   end
 
@@ -37,11 +37,11 @@ describe Authentise::API::Users do
         email: "test@example.com",
         name: "Test User",
         username: "testuser",
-        password: "password"
+        password: "password",
       )
       returned.must_equal(
         url: "https://example.com/user/1111",
-        uuid: "1111"
+        uuid: "1111",
       )
     end
 
@@ -55,7 +55,7 @@ describe Authentise::API::Users do
           email: "test@example.com",
           name: "Test User",
           username: "testuser",
-          password: "password"
+          password: "password",
         )
       end
     end
@@ -69,7 +69,7 @@ describe Authentise::API::Users do
       }
       @request_headers = {
         "Accept" => "application/json",
-        "Content-Type" => "application/x-www-form-urlencoded"
+        "Content-Type" => "application/x-www-form-urlencoded",
       }
       @response_headers = {
         "Set-Cookie" => "session=f4242aef; " \
@@ -86,10 +86,10 @@ describe Authentise::API::Users do
 
       returned = Authentise::API::Users.create_session(
         username: "testuser",
-        password: "password"
+        password: "password",
       )
       returned.must_equal(
-        token: "f4242aef"
+        token: "f4242aef",
       )
     end
 
@@ -100,7 +100,7 @@ describe Authentise::API::Users do
       assert_raises Authentise::API::Error do
         Authentise::API::Users.create_session(
           username: "testuser",
-          password: "password"
+          password: "password",
         )
       end
     end

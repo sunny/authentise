@@ -65,7 +65,7 @@ describe Authentise::API do
           printing_percentage: 20,
           minutes_left: nil,
           message: nil,
-        }
+        },
       }
 
       stub_request(:get, api_url)
@@ -76,7 +76,7 @@ describe Authentise::API do
         printing_job_status_name: "warming_up",
         printing_percentage: 20,
         minutes_left: nil,
-        message: nil
+        message: nil,
       )
     end
   end

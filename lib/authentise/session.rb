@@ -16,7 +16,7 @@ module Authentise
     def create
       response = API::Users.create_session(
         username: username,
-        password: password
+        password: password,
       )
       @token = response[:token]
       true

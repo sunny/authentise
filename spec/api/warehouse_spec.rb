@@ -4,14 +4,14 @@ require "authentise/api/warehouse"
 describe Authentise::API::Warehouse do
   before do
     @response_error_body = {
-      message: "Some test error"
+      message: "Some test error",
     }.to_json
   end
 
   describe "post_model" do
     before do
       @request_body = {
-        "name" => "Test"
+        "name" => "Test",
       }
       @request_headers = {
         "Accept" => "application/json",
@@ -20,7 +20,7 @@ describe Authentise::API::Warehouse do
       }
       @response_headers = {
         "Location" => "http://example.com/1",
-        "X-Upload-Location" => "http://example.com/2"
+        "X-Upload-Location" => "http://example.com/2",
       }
     end
 
@@ -31,11 +31,11 @@ describe Authentise::API::Warehouse do
 
       returned = Authentise::API::Warehouse.create_model(
         name: "Test",
-        session_token: "f45k"
+        session_token: "f45k",
       )
       returned.must_equal(
         model_url: "http://example.com/1",
-        upload_url: "http://example.com/2"
+        upload_url: "http://example.com/2",
       )
     end
 
@@ -47,7 +47,7 @@ describe Authentise::API::Warehouse do
       assert_raises Authentise::API::Error do
         Authentise::API::Warehouse.create_model(
           name: "Test",
-          session_token: "f45k"
+          session_token: "f45k",
         )
       end
     end
@@ -60,7 +60,7 @@ describe Authentise::API::Warehouse do
 
     it "returns true" do
       request_headers = {
-        'Content-Type' => 'application/octet-stream'
+        'Content-Type' => 'application/octet-stream',
       }
       stub_request(:put, "https://example.com/")
         .with(body: @request_body, headers: request_headers)
@@ -68,7 +68,7 @@ describe Authentise::API::Warehouse do
 
       response = Authentise::API::Warehouse.put_file(
         url: "https://example.com/",
-        path: "spec/fixtures/example.stl"
+        path: "spec/fixtures/example.stl",
       )
 
       response.must_equal(true)
@@ -81,7 +81,7 @@ describe Authentise::API::Warehouse do
       assert_raises Authentise::API::Error do
         Authentise::API::Warehouse.put_file(
           url: "https://example.com/",
-          path: "spec/fixtures/example.stl"
+          path: "spec/fixtures/example.stl",
         )
       end
     end
@@ -93,7 +93,7 @@ describe Authentise::API::Warehouse do
       @request_headers = {
         "Accept" => "application/json",
         "Content-Type" => "application/json",
-        "Cookie" => "session=f56"
+        "Cookie" => "session=f56",
       }
       @response_body = {
         name: "Test",
@@ -127,7 +127,7 @@ describe Authentise::API::Warehouse do
         updated_at: Time.local(2015, 5, 29, 16, 12, 13, 991_340),
         parents_urls: ["http://example.com/model/1",
                        "http://example.com/model/2"],
-        children_urls: ["http://example.com/model/1"]
+        children_urls: ["http://example.com/model/1"],
       )
     end
 
@@ -150,7 +150,7 @@ describe Authentise::API::Warehouse do
         updated_at: Time.local(2015, 5, 29, 16, 12, 13, 991_340),
         parents_urls: ["http://example.com/model/1",
                        "http://example.com/model/2"],
-        children_urls: ["http://example.com/model/1"]
+        children_urls: ["http://example.com/model/1"],
       )
     end
 
@@ -231,7 +231,7 @@ describe Authentise::API::Warehouse do
         v: 4,
         w: 5,
         callback: { url: "http://my.example.com/processing/done",
-                    method: "POST" }
+                    method: "POST" },
       }
       @request_headers = {
         "Accept" => "application/json",
@@ -242,7 +242,7 @@ describe Authentise::API::Warehouse do
 
     it "returns snapshot data" do
       response_headers = {
-        "Location" => "http://example.com/model/4242/snapshot/1212/"
+        "Location" => "http://example.com/model/4242/snapshot/1212/",
       }
 
       stub_request(:post, "https://models.authentise.com/model/4242/snapshot/")
@@ -264,11 +264,11 @@ describe Authentise::API::Warehouse do
         v: 4,
         w: 5,
         callback: { url: "http://my.example.com/processing/done",
-                    method: "POST" }
+                    method: "POST" },
       )
 
       response.must_equal(
-        url: "http://example.com/model/4242/snapshot/1212/"
+        url: "http://example.com/model/4242/snapshot/1212/",
       )
     end
   end
@@ -295,7 +295,7 @@ describe Authentise::API::Warehouse do
         w: 5,
         slice_height: nil,
         created: "2015-05-13 22:18:22.658536",
-        content: "https://example.com/content_url"
+        content: "https://example.com/content_url",
       }.to_json
     end
 
@@ -306,7 +306,7 @@ describe Authentise::API::Warehouse do
 
       response = Authentise::API::Warehouse.get_snapshot(
         url: "https://models.authentise.com/model/42/snapshot/43/",
-        session_token: "z90"
+        session_token: "z90",
       )
       response.must_equal(
         status: "snapshot_rendering",
@@ -323,7 +323,7 @@ describe Authentise::API::Warehouse do
         w: 5,
         slice_height: nil,
         created_at: Time.local(2015, 05, 13, 22, 18, 22, 658_536),
-        content_url: "https://example.com/content_url"
+        content_url: "https://example.com/content_url",
       )
     end
   end

@@ -12,7 +12,7 @@ module Authentise
       it "returns urls from the API" do
         response = {
           upload_url: "https://bah",
-          model_url: "https://beh"
+          model_url: "https://beh",
         }
         API::Warehouse.stub :create_model, response do
           result = model.create

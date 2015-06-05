@@ -20,14 +20,14 @@ module Authentise
       def create_user(params)
         url = "https://users.authentise.com/users/"
         options = {
-          accept: :json
+          accept: :json,
         }
         RestClient.post(url, params, options) do |response, _request, _result|
           json = JSON.parse(response)
           if response.code == 201
             {
               url: json["uri"],
-              uuid: json["uuid"]
+              uuid: json["uuid"],
             }
           else
             fail API::Error, json["message"]
@@ -46,12 +46,12 @@ module Authentise
       def create_session(params)
         url = "https://users.authentise.com/sessions/"
         options = {
-          accept: :json
+          accept: :json,
         }
         RestClient.post(url, params, options) do |response, _request, _result|
           if response.code == 201
             {
-              token: response.cookies["session"]
+              token: response.cookies["session"],
             }
           else
             json = JSON.parse(response)

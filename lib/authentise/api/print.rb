@@ -18,7 +18,7 @@ module Authentise
           receiver_email: receiver_email,
           print_value: print_value,
           print_value_currency: print_value_currency,
-          partner_job_id: partner_job_id
+          partner_job_id: partner_job_id,
         }.to_json
         options = {
           content_type: :json,
