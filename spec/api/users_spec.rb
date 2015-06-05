@@ -95,7 +95,6 @@ describe Authentise::API::Users do
 
     it "raises errors" do
       stub_request(:post, "https://users.authentise.com/sessions/")
-        .with(body: @request_body, headers: @request_headers)
         .to_return(status: 400, body: @response_error_body)
 
       assert_raises Authentise::API::Error do

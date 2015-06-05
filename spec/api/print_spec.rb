@@ -47,7 +47,6 @@ describe Authentise::API::Print do
 
     it "raises errors" do
       stub_request(:post, "https://print.authentise.com/token/")
-        .with(body: @request_body, headers: @request_headers)
         .to_return(status: 400, body: @response_error_body)
 
       assert_raises Authentise::API::Error do

@@ -76,7 +76,6 @@ describe Authentise::API::Warehouse do
 
     it "raises errors" do
       stub_request(:put, "https://example.com/")
-        .with(body: @request_body)
         .to_return(status: 400, body: @response_error_body)
 
       assert_raises Authentise::API::Error do
@@ -157,7 +156,6 @@ describe Authentise::API::Warehouse do
 
     it "raises errors" do
       stub_request(:get, @url)
-        .with(headers: @request_headers)
         .to_return(body: "", status: 404)
 
       assert_raises Authentise::API::NotFoundError do
