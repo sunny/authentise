@@ -72,9 +72,9 @@ describe Authentise::API::Users do
         "Content-Type" => "application/x-www-form-urlencoded"
       }
       @response_headers = {
-        "Set-Cookie" => "session=f4242aef; " + \
-                        "expires=Thu, 27-Apr-2017 08:49:20 GMT; " + \
-                        "path=/; " + \
+        "Set-Cookie" => "session=f4242aef; " \
+                        "expires=Thu, 27-Apr-2017 08:49:20 GMT; " \
+                        "path=/; " \
                         "domain=authentise.com",
       }
     end
