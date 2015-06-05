@@ -13,6 +13,10 @@ describe Authentise::API::Print do
       @request_body = {
         api_key: "test",
         model: "http://example.com/model/42",
+        receiver_email: "example@example.com",
+        print_value: 42,
+        print_value_currency: "EUR",
+        partner_job_id: 43
       }.to_json
       @request_headers = {
         "Accept" => "application/json",
@@ -29,7 +33,11 @@ describe Authentise::API::Print do
         .to_return(status: 201, headers: @response_headers)
 
       returned = Authentise::API::Print.create_token(
-        model_url: "http://example.com/model/42"
+        model_url: "http://example.com/model/42",
+        receiver_email: "example@example.com",
+        print_value: 42,
+        print_value_currency: "EUR",
+        partner_job_id: 43
       )
 
       returned.must_equal(
