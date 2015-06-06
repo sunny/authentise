@@ -25,6 +25,10 @@ module Authentise
       @token_url ||= begin
         response = API::Print.create_token(
           model_url: model_url,
+          receiver_email: receiver_email,
+          print_value: print_value,
+          print_value_currency: print_value_currency,
+          partner_job_id: partner_job_id,
         )
         response[:url]
       end
