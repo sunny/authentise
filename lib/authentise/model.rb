@@ -73,13 +73,13 @@ module Authentise
     end
     # rubocop:enable Metrics/AbcSize
 
-    def self.find_by_url(url: url, session_token: nil)
+    def self.find_by_url(url: nil, session_token: nil)
       model = new(url: url)
       model.fetch(session_token: session_token)
       model
     end
 
-    def self.find_by_uuid(uuid: uuid, session_token: nil)
+    def self.find_by_uuid(uuid: nil, session_token: nil)
       model = new(uuid: uuid)
       model.fetch(session_token: session_token)
       model
