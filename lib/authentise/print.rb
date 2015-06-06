@@ -22,7 +22,7 @@ module Authentise
     end
 
     def url
-      @token_url ||= begin
+      @url ||= begin
         response = API::Print.create_token(
           model_url: model_url,
           receiver_email: receiver_email,
