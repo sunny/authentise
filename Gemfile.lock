@@ -1,20 +1,20 @@
 PATH
   remote: .
   specs:
-    authentise (0.1.0)
+    authentise (0.2.0)
       rest-client
 
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.3.7)
+    addressable (2.3.8)
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
     domain_name (0.5.24)
       unf (>= 0.0.5, < 1.0.0)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
-    mime-types (2.5)
+    mime-types (2.6.1)
     minitest (5.7.0)
     netrc (0.10.3)
     rake (10.4.2)
@@ -26,7 +26,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.1)
-    webmock (1.20.4)
+    webmock (1.21.0)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
 
