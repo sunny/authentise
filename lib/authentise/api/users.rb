@@ -21,6 +21,8 @@ module Authentise
         url = "https://users.authentise.com/users/"
         options = {
           accept: :json,
+          open_timeout: 2,
+          timeout: 2,
         }
         RestClient.post(url, params, options) do |response, _request, _result|
           json = JSON.parse(response)
@@ -47,6 +49,8 @@ module Authentise
         url = "https://users.authentise.com/sessions/"
         options = {
           accept: :json,
+          open_timeout: 2,
+          timeout: 2,
         }
         RestClient.post(url, params, options) do |response, _request, _result|
           if response.code == 201

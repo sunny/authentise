@@ -23,6 +23,8 @@ module Authentise
         options = {
           content_type: :json,
           accept: :json,
+          open_timeout: 2,
+          timeout: 2,
         }
         RestClient.post(url, body, options) do |response, _request, _result|
           if response.code == 201

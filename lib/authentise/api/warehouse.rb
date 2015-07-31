@@ -36,6 +36,8 @@ module Authentise
           content_type: :json,
           accept: :json,
           cookies: { session: session_token },
+          open_timeout: 2,
+          timeout: 2,
         }
         RestClient.post(url, body, options) do |response, _request, _result|
           if response.code == 201
@@ -53,6 +55,8 @@ module Authentise
         file = File.read(path)
         options = {
           content_type: 'application/octet-stream',
+          open_timeout: 2,
+          timeout: 2,
         }
         RestClient.put(url, file, options) do |response, _request, _result|
           if response.code == 200
@@ -70,6 +74,8 @@ module Authentise
           content_type: :json,
           accept: :json,
           cookies: { session: session_token },
+          open_timeout: 2,
+          timeout: 2,
         }
         RestClient.get(url, headers) do |response, _request, _result|
           if response.code == 200
@@ -162,6 +168,8 @@ module Authentise
           content_type: :json,
           accept: :json,
           cookies: { session: session_token },
+          open_timeout: 2,
+          timeout: 2,
         }
         RestClient.post(url, body, headers) do |response, _request, _result|
           if response.code == 201
@@ -181,6 +189,8 @@ module Authentise
           content_type: :json,
           accept: :json,
           cookies: { session: session_token },
+          open_timeout: 2,
+          timeout: 2,
         }
         RestClient.get(url, headers) do |response, _request, _result|
           if response.code == 200
