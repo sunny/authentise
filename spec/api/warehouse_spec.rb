@@ -44,12 +44,14 @@ describe Authentise::API::Warehouse do
         .with(body: @request_body.to_json, headers: @request_headers)
         .to_return(status: 400, body: @response_error_body)
 
-      assert_raises Authentise::API::Error do
+      err = assert_raises Authentise::API::UnknownResponseCodeError do
         Authentise::API::Warehouse.create_model(
           name: "Test",
           session_token: "f45k",
         )
       end
+
+      err.message.must_equal('(400) {"message":"Some test error"}')
     end
   end
 
@@ -78,12 +80,14 @@ describe Authentise::API::Warehouse do
       stub_request(:put, "https://example.com/")
         .to_return(status: 400, body: @response_error_body)
 
-      assert_raises Authentise::API::Error do
+      err = assert_raises Authentise::API::UnknownResponseCodeError do
         Authentise::API::Warehouse.put_file(
           url: "https://example.com/",
           path: "spec/fixtures/example.stl",
         )
       end
+
+      err.message.must_equal('(400) {"message":"Some test error"}')
     end
   end
 

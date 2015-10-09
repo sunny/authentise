@@ -32,7 +32,7 @@ module Authentise
               uuid: json["uuid"],
             }
           else
-            fail API::Error, json["message"]
+            fail UnknownResponseCodeError.new(response.code, response)
           end
         end
       end
@@ -58,8 +58,7 @@ module Authentise
               token: response.cookies["session"],
             }
           else
-            json = JSON.parse(response)
-            fail API::Error, json["message"]
+            fail UnknownResponseCodeError.new(response.code, response)
           end
         end
       end

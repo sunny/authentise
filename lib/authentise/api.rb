@@ -11,6 +11,13 @@ module Authentise
     # 404 Error
     class NotFoundError < Error; end
 
+    # Other response codes
+    class UnknownResponseCodeError < Error
+      def initialize(code, message)
+        super("(#{code}) #{message}")
+      end
+    end
+
     module_function
 
     # DEPRECATED, use Authentise::API::Print.create_token(…)

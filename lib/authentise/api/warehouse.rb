@@ -46,7 +46,7 @@ module Authentise
               upload_url: response.headers[:x_upload_location],
             }
           else
-            fail API::Error, JSON.parse(response)["message"]
+            fail UnknownResponseCodeError.new(response.code, response)
           end
         end
       end
@@ -62,7 +62,7 @@ module Authentise
           if response.code == 200
             true
           else
-            fail API::Error, response
+            fail UnknownResponseCodeError.new(response.code, response)
           end
         end
       end
@@ -81,9 +81,9 @@ module Authentise
           if response.code == 200
             parse_model(response, url)
           elsif response.code == 404
-            fail Authentise::API::NotFoundError
+            fail NotFoundError
           else
-            fail Authentise::API::Error, "Error #{response.code}"
+            fail UnknownResponseCodeError.new(response.code, response)
           end
         end
       end
@@ -177,7 +177,7 @@ module Authentise
               url: response.headers[:location],
             }
           else
-            fail API::Error, JSON.parse(response)["message"]
+            fail UnknownResponseCodeError.new(response.code, response)
           end
         end
       end
@@ -196,9 +196,9 @@ module Authentise
           if response.code == 200
             parse_snapshot(response)
           elsif response.code == 404
-            fail Authentise::API::NotFoundError
+            fail NotFoundError
           else
-            fail Authentise::API::Error, "Error #{response.code}"
+            fail UnknownResponseCodeError.new(response.code, response)
           end
         end
       end

@@ -50,7 +50,7 @@ describe Authentise::API::Users do
         .with(body: @request_body, headers: @request_headers)
         .to_return(status: 400, body: @response_error_body)
 
-      assert_raises Authentise::API::Error do
+      err = assert_raises Authentise::API::UnknownResponseCodeError do
         Authentise::API::Users.create_user(
           email: "test@example.com",
           name: "Test User",
@@ -58,6 +58,8 @@ describe Authentise::API::Users do
           password: "password",
         )
       end
+
+      err.message.must_equal('(400) {"message":"Some test error"}')
     end
   end
 
@@ -97,12 +99,14 @@ describe Authentise::API::Users do
       stub_request(:post, "https://users.authentise.com/sessions/")
         .to_return(status: 400, body: @response_error_body)
 
-      assert_raises Authentise::API::Error do
+      err = assert_raises Authentise::API::UnknownResponseCodeError do
         Authentise::API::Users.create_session(
           username: "testuser",
           password: "password",
         )
       end
+
+      err.message.must_equal('(400) {"message":"Some test error"}')
     end
   end
 end

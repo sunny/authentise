@@ -24,7 +24,7 @@ module Authentise
           if response.code == 201
             { url: response.headers[:x_token_location] }
           else
-            fail API::Error, response
+            fail UnknownResponseCodeError.new(response.code, response)
           end
         end
       end
