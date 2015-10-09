@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    authentise (0.2.2)
+    authentise (0.2.3)
       rest-client
 
 GEM
