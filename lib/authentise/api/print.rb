@@ -20,13 +20,7 @@ module Authentise
           print_value_currency: print_value_currency,
           partner_job_id: partner_job_id,
         }.to_json
-        options = {
-          content_type: :json,
-          accept: :json,
-          open_timeout: 2,
-          timeout: 2,
-        }
-        RestClient.post(url, body, options) do |response, _request, _result|
+        RestClient.post(url, body, rest_client_options) do |response, _, _|
           if response.code == 201
             { url: response.headers[:x_token_location] }
           else
@@ -35,6 +29,16 @@ module Authentise
         end
       end
 
+      private
+
+      def rest_client_options
+        {
+          content_type: :json,
+          accept: :json,
+          open_timeout: 2,
+          timeout: 2,
+        }
+      end
     end
   end
 end
