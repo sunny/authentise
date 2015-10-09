@@ -25,7 +25,9 @@ module Authentise
           open_timeout: 2,
           timeout: 2,
         }
-        RestClient.post(url, params, options) do |response, _request, _result|
+        body = params.to_json
+
+        RestClient.post(url, body, options) do |response, _request, _result|
           json = JSON.parse(response)
           if response.code == 201
             {
@@ -54,7 +56,9 @@ module Authentise
           open_timeout: 2,
           timeout: 2,
         }
-        RestClient.post(url, params, options) do |response, _request, _result|
+        body = params.to_json
+
+        RestClient.post(url, body, options) do |response, _request, _result|
           if response.code == 201
             {
               token: response.cookies["session"],

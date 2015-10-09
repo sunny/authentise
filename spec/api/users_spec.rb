@@ -15,11 +15,13 @@ describe Authentise::API::Users do
         name: "Test User",
         username: "testuser",
         password: "password",
-      }
+      }.to_json
+
       @request_headers = {
         "Accept" => "application/json",
-        "Content-Type" => "application/x-www-form-urlencoded",
+        "Content-Type" => "application/json",
       }
+
       @response_body = {
         name: "Test User",
         username: "testuser",
@@ -68,11 +70,13 @@ describe Authentise::API::Users do
       @request_body = {
         username: "testuser",
         password: "password",
-      }
+      }.to_json
+
       @request_headers = {
         "Accept" => "application/json",
-        "Content-Type" => "application/x-www-form-urlencoded",
+        "Content-Type" => "application/json",
       }
+
       @response_headers = {
         "Set-Cookie" => "session=f4242aef; " \
                         "expires=Thu, 27-Apr-2017 08:49:20 GMT; " \
