@@ -20,6 +20,7 @@ module Authentise
           print_value_currency: print_value_currency,
           partner_job_id: partner_job_id,
         }.to_json
+
         RestClient.post(url, body, rest_client_options) do |response, _, _|
           if response.code == 201
             { url: response.headers[:x_token_location] }
@@ -28,8 +29,6 @@ module Authentise
           end
         end
       end
-
-      private
 
       def rest_client_options
         {
