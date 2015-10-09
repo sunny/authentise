@@ -20,6 +20,7 @@ module Authentise
       def create_user(params)
         url = "https://users.authentise.com/users/"
         options = {
+          content_type: :json,
           accept: :json,
           open_timeout: 2,
           timeout: 2,
@@ -48,6 +49,7 @@ module Authentise
       def create_session(params)
         url = "https://users.authentise.com/sessions/"
         options = {
+          content_type: :json,
           accept: :json,
           open_timeout: 2,
           timeout: 2,
