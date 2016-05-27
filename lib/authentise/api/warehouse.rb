@@ -60,7 +60,7 @@ module Authentise
           timeout: 2,
         }
         RestClient.put(url, file, options) do |response, _request, _result|
-          if response.code == 200
+          if response.code == 200 || response.code == 204
             true
           else
             fail UnknownResponseCodeError.new(response.code, response)
