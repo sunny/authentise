@@ -6,9 +6,10 @@ See http://docs.authentise.com/model/reference.html
 Install
 -------
 
-Add the following line to your Gemfile:
+Add the following lines to your Gemfile:
 
 ```rb
+# Stream 3D files through Authentise's API
 gem "authentise"
 ```
 
